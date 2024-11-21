@@ -4,10 +4,9 @@ plugins {
 }
 
 android {
-    namespace = "com.github.repos.feature.favourites"
+    namespace = "com.github.repos.feature.details"
 }
 
 dependencies {
     implementation(projects.core.data)
-    implementation(projects.feature.repos)
 }

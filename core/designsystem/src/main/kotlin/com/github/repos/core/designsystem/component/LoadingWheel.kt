@@ -28,15 +28,12 @@ import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.github.repos.core.designsystem.theme.NiaTheme
 import kotlinx.coroutines.launch
 
 @Composable
 fun NiaLoadingWheel(
-    contentDesc: String,
     modifier: Modifier = Modifier,
 ) {
     val infiniteTransition = rememberInfiniteTransition(label = "wheel transition")
@@ -96,7 +93,6 @@ fun NiaLoadingWheel(
             .size(48.dp)
             .padding(8.dp)
             .graphicsLayer { rotationZ = rotationAnim }
-            .semantics { contentDescription = contentDesc }
             .testTag("loadingWheel"),
     ) {
         repeat(NUM_OF_LINES) { index ->
@@ -127,9 +123,7 @@ fun NiaOverlayLoadingWheel(
         modifier = modifier
             .size(60.dp),
     ) {
-        NiaLoadingWheel(
-            contentDesc = contentDesc,
-        )
+        NiaLoadingWheel()
     }
 }
 
@@ -138,7 +132,7 @@ fun NiaOverlayLoadingWheel(
 fun NiaLoadingWheelPreview() {
     NiaTheme {
         Surface {
-            NiaLoadingWheel(contentDesc = "LoadingWheel")
+            NiaLoadingWheel()
         }
     }
 }

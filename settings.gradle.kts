@@ -29,3 +29,4 @@ include(":core:ui")
 
 include(":feature:repos")
 include(":feature:favourites")
+include(":feature:details")

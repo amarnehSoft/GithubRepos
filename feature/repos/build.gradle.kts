@@ -9,4 +9,9 @@ android {
 
 dependencies {
     implementation(projects.core.data)
+    implementation(projects.feature.details)
+
+    implementation(libs.androidx.compose.material3.adaptive)
+    implementation(libs.androidx.compose.material3.adaptive.layout)
+    implementation(libs.androidx.compose.material3.adaptive.navigation)
 }

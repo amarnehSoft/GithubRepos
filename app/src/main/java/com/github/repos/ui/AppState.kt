@@ -93,8 +93,15 @@ class AppState(
         }
 
         when (topLevelDestination) {
-            TopLevelDestination.REPOS -> navController.navigateToRepos(topLevelNavOptions)
-            TopLevelDestination.FAVOURITES -> navController.navigateToFavourites(topLevelNavOptions)
+            TopLevelDestination.REPOS -> navController.navigateToRepos(
+                initialRepoId = null,
+                topLevelNavOptions
+            )
+
+            TopLevelDestination.FAVOURITES -> navController.navigateToFavourites(
+                initialRepoId = null,
+                topLevelNavOptions
+            )
         }
     }
 }

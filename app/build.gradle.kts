@@ -33,6 +33,7 @@ android {
 dependencies {
     implementation(projects.feature.repos)
     implementation(projects.feature.favourites)
+    implementation(projects.feature.details)
 
     implementation(projects.core.common)
     implementation(projects.core.ui)
