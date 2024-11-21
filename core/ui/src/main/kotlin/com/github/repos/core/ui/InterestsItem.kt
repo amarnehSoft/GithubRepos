@@ -13,7 +13,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,7 +21,6 @@ import com.github.repos.core.designsystem.component.DynamicAsyncImage
 import com.github.repos.core.designsystem.component.NiaIconToggleButton
 import com.github.repos.core.designsystem.icon.NiaIcons
 import com.github.repos.core.designsystem.theme.NiaTheme
-import com.github.repos.core.ui.R.string
 
 @Composable
 fun InterestsItem(
@@ -53,17 +51,13 @@ fun InterestsItem(
                 icon = {
                     Icon(
                         imageVector = NiaIcons.Add,
-                        contentDescription = stringResource(
-                            id = string.core_ui_interests_card_follow_button_content_desc,
-                        ),
+                        contentDescription = "",
                     )
                 },
                 checkedIcon = {
                     Icon(
                         imageVector = NiaIcons.Check,
-                        contentDescription = stringResource(
-                            id = string.core_ui_interests_card_unfollow_button_content_desc,
-                        ),
+                        contentDescription = "",
                     )
                 },
             )

@@ -31,6 +31,15 @@ android {
 }
 
 dependencies {
+    implementation(projects.feature.repos)
+    implementation(projects.feature.favourites)
+
+    implementation(projects.core.common)
+    implementation(projects.core.ui)
+    implementation(projects.core.designsystem)
+    implementation(projects.core.data)
+    implementation(projects.core.model)
+
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3.adaptive)
     implementation(libs.androidx.compose.material3.adaptive.layout)

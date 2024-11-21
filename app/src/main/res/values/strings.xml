@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">GithubRepos</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="not_connected">⚠️ You aren’t connected to the internet</string>
 </resources>
