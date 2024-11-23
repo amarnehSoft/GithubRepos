@@ -5,7 +5,6 @@ import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.WindowAdaptiveInfo
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.material3.adaptive.layout.AnimatedPane
-import androidx.compose.material3.adaptive.layout.AnimatedPaneScope
 import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffold
 import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffoldRole
 import androidx.compose.material3.adaptive.layout.PaneAdaptedValue
@@ -53,7 +52,7 @@ internal fun ReposListDetailScreen(
 fun ReposListDetailScreen(
     viewModel: Repos2PaneViewModel = hiltViewModel(),
     windowAdaptiveInfo: WindowAdaptiveInfo = currentWindowAdaptiveInfo(),
-    listContent: (@Composable (onRepoClick: (repoId: String) -> Unit, highlightSelectedRepo: Boolean) -> Unit),
+    listContent: (@Composable (onRepoClick: (repoId: Long) -> Unit, highlightSelectedRepo: Boolean) -> Unit),
 ) {
     val selectedRepoId by viewModel.selectedRepoId.collectAsStateWithLifecycle()
     ReposListDetailScreen(
@@ -67,10 +66,10 @@ fun ReposListDetailScreen(
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 internal fun ReposListDetailScreen(
-    selectedRepoId: String?,
-    onRepoClick: (String) -> Unit,
+    selectedRepoId: Long?,
+    onRepoClick: (Long) -> Unit,
     windowAdaptiveInfo: WindowAdaptiveInfo,
-    listContent: (@Composable (onRepoClick: (repoId: String) -> Unit, highlightSelectedRepo: Boolean) -> Unit),
+    listContent: (@Composable (onRepoClick: (repoId: Long) -> Unit, highlightSelectedRepo: Boolean) -> Unit),
 ) {
     val listDetailNavigator = rememberListDetailPaneScaffoldNavigator(
         scaffoldDirective = calculatePaneScaffoldDirective(windowAdaptiveInfo),
@@ -98,7 +97,7 @@ internal fun ReposListDetailScreen(
         rememberNavController()
     }
 
-    fun onTopicClickShowDetailPane(topicId: String) {
+    fun onTopicClickShowDetailPane(topicId: Long) {
         onRepoClick(topicId)
         if (listDetailNavigator.isDetailPaneVisible()) {
             // If the detail pane was visible, then use the nestedNavController navigate call

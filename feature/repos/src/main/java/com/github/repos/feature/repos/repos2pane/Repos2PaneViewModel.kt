@@ -16,12 +16,12 @@ class Repos2PaneViewModel @Inject constructor(
 ) : ViewModel() {
 
     val route = savedStateHandle.toRoute<ReposRoute>()
-    val selectedRepoId: StateFlow<String?> = savedStateHandle.getStateFlow(
+    val selectedRepoId: StateFlow<Long?> = savedStateHandle.getStateFlow(
         key = REPO_ID_KEY,
         initialValue = route.initialRepoId,
     )
 
-    fun onRepoClick(repoId: String?) {
+    fun onRepoClick(repoId: Long?) {
         savedStateHandle[REPO_ID_KEY] = repoId
     }
 }

@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.paging.PagingData
 import com.github.repos.core.designsystem.component.NiaBackground
 import com.github.repos.core.designsystem.component.NiaLoadingWheel
 import com.github.repos.core.designsystem.theme.NiaTheme
@@ -16,7 +17,7 @@ import com.github.repos.core.ui.DevicePreviews
 
 @Composable
 fun ReposRoute(
-    onRepoClick: (String) -> Unit,
+    onRepoClick: (Long) -> Unit,
     modifier: Modifier = Modifier,
     highlightSelectedRepo: Boolean = false,
     viewModel: ReposViewModel = hiltViewModel(),
@@ -38,8 +39,8 @@ fun ReposRoute(
 @Composable
 fun ReposScreen(
     uiState: ReposUiState,
-    addToFavourites: (String, Boolean) -> Unit,
-    onRepoClick: (String) -> Unit,
+    addToFavourites: (Long, Boolean) -> Unit,
+    onRepoClick: (Long) -> Unit,
     modifier: Modifier = Modifier,
     highlightSelectedRepo: Boolean = false,
 ) {
@@ -53,7 +54,7 @@ fun ReposScreen(
 
             is ReposUiState.Repos ->
                 ReposTabContent(
-                    repositories = uiState.repositories,
+                    repositories = emptyList(), //uiState.repositories,
                     onRepoClick = onRepoClick,
                     onSaveButtonClick = addToFavourites,
                     selectedRepoId = uiState.selectedRepoId,
@@ -86,7 +87,7 @@ fun PreviewReposScreen() {
             ReposScreen(
                 uiState = ReposUiState.Repos(
                     selectedRepoId = null,
-                    repositories = emptyList(),
+                    repositories = PagingData.empty(),
                 ),
                 addToFavourites = { _, _ -> },
                 onRepoClick = {},

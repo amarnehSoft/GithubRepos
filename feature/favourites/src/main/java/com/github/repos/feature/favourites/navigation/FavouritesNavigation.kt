@@ -6,11 +6,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class FavouritesRoute(
-    val initialRepoId: String? = null,
+    val initialRepoId: Long? = null,
 )
 
 fun NavController.navigateToFavourites(
-    initialRepoId: String? = null,
+    initialRepoId: Long? = null,
     navOptions: NavOptions? = null,
 ) {
     navigate(route = FavouritesRoute(initialRepoId), navOptions)

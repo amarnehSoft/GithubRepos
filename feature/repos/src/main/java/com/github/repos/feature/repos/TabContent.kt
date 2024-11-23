@@ -27,11 +27,11 @@ import com.github.repos.core.ui.InterestsItem
 @Composable
 fun ReposTabContent(
     repositories: List<Repository>, // SavableRepo
-    onRepoClick: (String) -> Unit,
-    onSaveButtonClick: (String, Boolean) -> Unit,
+    onRepoClick: (Long) -> Unit,
+    onSaveButtonClick: (Long, Boolean) -> Unit,
     modifier: Modifier = Modifier,
     withBottomSpacer: Boolean = true,
-    selectedRepoId: String? = null,
+    selectedRepoId: Long? = null,
     highlightSelectedRepo: Boolean = false,
 ) {
     Box(

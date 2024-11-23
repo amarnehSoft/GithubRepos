@@ -12,5 +12,9 @@ interface ReposRepository {
         perPage: Int,
     ): Flow<PagingData<Repository>>
 
+    fun getFavourites(perPage: Int, query: String): Flow<PagingData<Repository>>
+
     suspend fun toggleFavorite(repositoryId: Long)
+
+    fun getRepositoryById(repositoryId: Long): Flow<Repository?>
 }

@@ -9,7 +9,7 @@ import com.github.repos.feature.repos.ReposScreen
 
 @Composable
 fun FavouritesRoute(
-    onRepoClick: (String) -> Unit,
+    onRepoClick: (Long) -> Unit,
     modifier: Modifier = Modifier,
     highlightSelectedRepo: Boolean = false,
     viewModel: FavouritesViewModel = hiltViewModel(),

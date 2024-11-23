@@ -231,7 +231,7 @@ private fun RepoDetailsToolbar(
         }
 
         Text(
-            text = repository.id,
+            text = repository.id.toString(),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier.padding(horizontal = 24.dp),
         )

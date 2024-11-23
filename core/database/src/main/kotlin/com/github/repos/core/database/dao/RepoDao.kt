@@ -1,5 +1,6 @@
 package com.github.repos.core.database.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -16,8 +17,11 @@ interface RepoDao {
     @Query("SELECT * FROM favourite_repos")
     fun getRepos(): Flow<List<RepoEntity>>
 
+    @Query("SELECT * FROM favourite_repos WHERE name LIKE '%' || :query || '%' OR description LIKE '%' || :query || '%' ORDER BY star_count DESC")
+    fun getReposDataSource(query: String): PagingSource<Int, RepoEntity>
+
     @Query("SELECT * FROM favourite_repos WHERE id = :id")
-    suspend fun getRepoById(id: Long): RepoEntity?
+    fun getRepoById(id: Long): Flow<RepoEntity?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRepo(repo: RepoEntity)

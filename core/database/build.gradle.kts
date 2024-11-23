@@ -11,4 +11,6 @@ android {
 dependencies {
     api(projects.core.model)
     implementation(libs.kotlinx.datetime)
+    implementation(libs.androidx.paging.runtime)
+    implementation(libs.androidx.room.paging)
 }

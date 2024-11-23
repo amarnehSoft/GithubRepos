@@ -3,6 +3,7 @@ package com.github.repos.core.database.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.github.repos.core.model.data.Repository
 
 @Entity(
     tableName = "favourite_repos",
@@ -25,3 +26,18 @@ data class RepoEntity(
     @ColumnInfo("owner_avatar_url")
     val ownerAvatarUrl: String,
 )
+
+fun RepoEntity.asExternalModel(): Repository =
+    Repository(
+        id = id,
+        name = name,
+        description = description,
+        stargazersCount = starCount,
+        language = language,
+        forks = forks,
+        createdAt = createdAt,
+        htmlUrl = htmlUrl,
+        ownerUsername = ownerUsername,
+        ownerAvatarUrl = ownerAvatarUrl,
+        isFavourite = true,
+    )

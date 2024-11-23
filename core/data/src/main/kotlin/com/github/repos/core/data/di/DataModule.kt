@@ -1,6 +1,7 @@
 package com.github.repos.core.data.di
 
 import com.github.repos.core.data.repository.ReposRepository
+import com.github.repos.core.data.repository.ReposRepositoryImpl
 import com.github.repos.core.data.util.ConnectivityManagerNetworkMonitor
 import com.github.repos.core.data.util.NetworkMonitor
 import dagger.Binds
@@ -14,7 +15,7 @@ abstract class DataModule {
 
     @Binds
     internal abstract fun bindsReposRepository(
-        reposRepository: ReposRepository,
+        reposRepository: ReposRepositoryImpl,
     ): ReposRepository
 
     @Binds
