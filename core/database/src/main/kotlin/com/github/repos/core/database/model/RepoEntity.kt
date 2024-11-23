@@ -5,26 +5,23 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(
-    tableName = "repos",
+    tableName = "favourite_repos",
 )
 data class RepoEntity(
     @PrimaryKey
-    val id: String,
+    val id: Long,
     val name: String,
-    val shortDescription: String,
-    @ColumnInfo(defaultValue = "")
-    val longDescription: String,
-    @ColumnInfo(defaultValue = "")
-    val url: String,
-    @ColumnInfo(defaultValue = "")
-    val imageUrl: String,
+    val description: String,
+    @ColumnInfo("star_count")
+    val starCount: Int,
+    val language: String,
+    val forks: Int,
+    @ColumnInfo("created_at")
+    val createdAt: String,
+    @ColumnInfo("html_url")
+    val htmlUrl: String,
+    @ColumnInfo("owner_username")
+    val ownerUsername: String,
+    @ColumnInfo("owner_avatar_url")
+    val ownerAvatarUrl: String,
 )
-
-//fun RepoEntity.asExternalModel() = Repo(
-//    id = id,
-//    name = name,
-//    shortDescription = shortDescription,
-//    longDescription = longDescription,
-//    url = url,
-//    imageUrl = imageUrl,
-//)

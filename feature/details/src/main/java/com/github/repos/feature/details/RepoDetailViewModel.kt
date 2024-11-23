@@ -4,7 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
-import com.github.repos.core.model.data.Repo
+import com.github.repos.core.model.data.Repository
 import com.github.repos.feature.details.navigation.RepoDetailsRoute
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
@@ -22,7 +22,7 @@ class RepoDetailsViewModel @Inject constructor(
 
     val uiState: StateFlow<RepoDetailsUiState> = flow<RepoDetailsUiState> {
         // TODO
-        emit(RepoDetailsUiState.Success(Repo(id = repoId)))
+        emit(RepoDetailsUiState.Success(Repository(id = repoId)))
     }
         .stateIn(
             scope = viewModelScope,
@@ -32,7 +32,7 @@ class RepoDetailsViewModel @Inject constructor(
 }
 
 sealed interface RepoDetailsUiState {
-    data class Success(val repo: Repo) : RepoDetailsUiState
+    data class Success(val repository: Repository) : RepoDetailsUiState
     data object Error : RepoDetailsUiState
     data object Loading : RepoDetailsUiState
 }

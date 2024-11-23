@@ -53,7 +53,7 @@ fun ReposScreen(
 
             is ReposUiState.Repos ->
                 ReposTabContent(
-                    repos = uiState.repos,
+                    repositories = uiState.repositories,
                     onRepoClick = onRepoClick,
                     onSaveButtonClick = addToFavourites,
                     selectedRepoId = uiState.selectedRepoId,
@@ -86,7 +86,7 @@ fun PreviewReposScreen() {
             ReposScreen(
                 uiState = ReposUiState.Repos(
                     selectedRepoId = null,
-                    repos = emptyList(),
+                    repositories = emptyList(),
                 ),
                 addToFavourites = { _, _ -> },
                 onRepoClick = {},

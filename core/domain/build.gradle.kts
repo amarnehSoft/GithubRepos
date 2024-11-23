@@ -11,4 +11,7 @@ dependencies {
     api(projects.core.data)
     api(projects.core.model)
     implementation(libs.javax.inject)
+
+    implementation(libs.androidx.paging.runtime)
+
 }

@@ -1,6 +1,9 @@
 package com.github.repos.core.network.di
 
 import androidx.tracing.trace
+import com.github.repos.core.network.BuildConfig
+import com.github.repos.core.network.GithubReposNetworkDataSource
+import com.github.repos.core.network.retrofit.RetrofitGithubReposNetwork
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,4 +38,10 @@ internal object NetworkModule {
             )
             .build()
     }
+
+    @Provides
+    @Singleton
+    fun provideNetworkDataSource(
+        retrofitGithubReposNetwork: RetrofitGithubReposNetwork,
+    ): GithubReposNetworkDataSource = retrofitGithubReposNetwork
 }

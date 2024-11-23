@@ -42,7 +42,7 @@ import com.github.repos.core.designsystem.component.scrollbar.rememberDraggableS
 import com.github.repos.core.designsystem.component.scrollbar.scrollbarState
 import com.github.repos.core.designsystem.icon.NiaIcons
 import com.github.repos.core.designsystem.theme.NiaTheme
-import com.github.repos.core.model.data.Repo
+import com.github.repos.core.model.data.Repository
 import com.github.repos.core.ui.DevicePreviews
 
 @Composable
@@ -97,7 +97,7 @@ internal fun RepoDetailsScreen(
                             showBackButton = showBackButton,
                             onBackClick = onBackClick,
                             onFollowClick = onSaveClick,
-                            repo = uiState.repo,
+                            repository = uiState.repository,
                         )
                     }
                     topicBody(
@@ -190,7 +190,7 @@ private fun TopicBodyPreview() {
 
 @Composable
 private fun RepoDetailsToolbar(
-    repo: Repo,
+    repository: Repository,
     modifier: Modifier = Modifier,
     showBackButton: Boolean = true,
     onBackClick: () -> Unit = {},
@@ -231,7 +231,7 @@ private fun RepoDetailsToolbar(
         }
 
         Text(
-            text = repo.id,
+            text = repository.id,
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier.padding(horizontal = 24.dp),
         )

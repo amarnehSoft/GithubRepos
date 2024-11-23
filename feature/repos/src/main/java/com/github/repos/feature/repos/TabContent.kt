@@ -21,12 +21,12 @@ import androidx.compose.ui.unit.dp
 import com.github.repos.core.designsystem.component.scrollbar.DraggableScrollbar
 import com.github.repos.core.designsystem.component.scrollbar.rememberDraggableScroller
 import com.github.repos.core.designsystem.component.scrollbar.scrollbarState
-import com.github.repos.core.model.data.Repo
+import com.github.repos.core.model.data.Repository
 import com.github.repos.core.ui.InterestsItem
 
 @Composable
 fun ReposTabContent(
-    repos: List<Repo>, // SavableRepo
+    repositories: List<Repository>, // SavableRepo
     onRepoClick: (String) -> Unit,
     onSaveButtonClick: (String, Boolean) -> Unit,
     modifier: Modifier = Modifier,
@@ -45,7 +45,7 @@ fun ReposTabContent(
             contentPadding = PaddingValues(vertical = 16.dp),
             state = scrollableState,
         ) {
-            repos.forEach { savableRepo ->
+            repositories.forEach { savableRepo ->
                 val repoId = savableRepo.id
                 item(key = repoId) {
                     val isSelected = highlightSelectedRepo && repoId == selectedRepoId
@@ -68,7 +68,7 @@ fun ReposTabContent(
             }
         }
         val scrollbarState = scrollableState.scrollbarState(
-            itemsAvailable = repos.size,
+            itemsAvailable = repositories.size,
         )
         scrollableState.DraggableScrollbar(
             modifier = Modifier
@@ -79,7 +79,7 @@ fun ReposTabContent(
             state = scrollbarState,
             orientation = Orientation.Vertical,
             onThumbMoved = scrollableState.rememberDraggableScroller(
-                itemsAvailable = repos.size,
+                itemsAvailable = repositories.size,
             ),
         )
     }
