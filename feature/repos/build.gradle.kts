@@ -16,5 +16,5 @@ dependencies {
     implementation(libs.androidx.compose.material3.adaptive.layout)
     implementation(libs.androidx.compose.material3.adaptive.navigation)
 
-    implementation(libs.androidx.paging.runtime)
+    implementation(libs.androidx.paging.compose)
 }

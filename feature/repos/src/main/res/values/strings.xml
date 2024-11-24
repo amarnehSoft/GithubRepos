@@ -1,5 +1,12 @@
 <resources>
     <string name="feature_repos_title">Github Repos</string>
     <string name="feature_repos_empty_header">No available data</string>
-    <string name="feature_repos_error_header">Something went wrong, please try again.</string>
+    <string name="feature_repos_error_header">Something went wrong. Please try again.</string>
+    <string name="feature_repos_created_in_last_day">Created in last day</string>
+    <string name="feature_repos_created_in_last_week">Created in last week</string>
+    <string name="feature_repos_created_in_last_month">Created in last month</string>
+
+    <string name="feature_repos_last_day">Last\nDay</string>
+    <string name="feature_repos_last_week">Last\nWeek</string>
+    <string name="feature_repos_last_month">Last\nMonth</string>
 </resources>

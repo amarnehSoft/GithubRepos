@@ -4,7 +4,7 @@ import androidx.paging.PagingData
 import com.github.repos.core.data.repository.ReposRepository
 import com.github.repos.core.model.data.Repository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDate
 import javax.inject.Inject
 
 class SearchRepositoriesUseCase @Inject constructor(
@@ -12,7 +12,7 @@ class SearchRepositoriesUseCase @Inject constructor(
 ) {
     operator fun invoke(
         query: String,
-        fromDate: Instant,
+        fromDate: LocalDate,
         perPage: Int,
     ): Flow<PagingData<Repository>> {
         return repository.searchRepositories(

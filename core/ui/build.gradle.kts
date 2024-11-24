@@ -15,4 +15,5 @@ dependencies {
     implementation(libs.androidx.browser)
     implementation(libs.coil.kt)
     implementation(libs.coil.kt.compose)
+    implementation(libs.androidx.paging.compose)
 }

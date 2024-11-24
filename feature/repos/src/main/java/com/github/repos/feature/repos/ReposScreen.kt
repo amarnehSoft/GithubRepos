@@ -1,19 +1,21 @@
 package com.github.repos.feature.repos
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.PagingData
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.github.repos.core.designsystem.component.NiaBackground
-import com.github.repos.core.designsystem.component.NiaLoadingWheel
 import com.github.repos.core.designsystem.theme.NiaTheme
+import com.github.repos.core.model.data.Repository
 import com.github.repos.core.ui.DevicePreviews
+import com.github.repos.feature.repos.search.TimeFrameFilter
+import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun ReposRoute(
@@ -22,10 +24,16 @@ fun ReposRoute(
     highlightSelectedRepo: Boolean = false,
     viewModel: ReposViewModel = hiltViewModel(),
 ) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val repositoriesPagingItems = viewModel.repositoriesPagingData.collectAsLazyPagingItems()
+    val selectedRepoId by viewModel.selectedRepoId.collectAsStateWithLifecycle()
+    val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
+    val selectedFilter by viewModel.timeFrameFilter.collectAsStateWithLifecycle()
 
     ReposScreen(
-        uiState = uiState,
+        repositoriesPagingItems = repositoriesPagingItems,
+        selectedRepoId = selectedRepoId,
+        searchQuery = searchQuery,
+        onSearchQueryChanged = viewModel::onSearchQueryChanged,
         addToFavourites = viewModel::addToFavourites,
         onRepoClick = {
             viewModel.onRepoClick(it)
@@ -33,40 +41,38 @@ fun ReposRoute(
         },
         highlightSelectedRepo = highlightSelectedRepo,
         modifier = modifier,
+        selectedFilter = selectedFilter,
+        onFilterSelected = viewModel::onFilterSelected,
     )
 }
 
 @Composable
 fun ReposScreen(
-    uiState: ReposUiState,
+    repositoriesPagingItems: LazyPagingItems<Repository>,
+    selectedRepoId: Long?,
+    searchQuery: String,
+    onSearchQueryChanged: (String) -> Unit,
+    selectedFilter: TimeFrameFilter = TimeFrameFilter.CREATED_IN_LAST_DAY,
+    onFilterSelected: (TimeFrameFilter) -> Unit = {},
     addToFavourites: (Long, Boolean) -> Unit,
     onRepoClick: (Long) -> Unit,
     modifier: Modifier = Modifier,
     highlightSelectedRepo: Boolean = false,
+    shouldShowFilter: Boolean = true,
 ) {
-    Column(
+    ReposTabContent(
+        repositories = repositoriesPagingItems,
+        searchQuery = searchQuery,
+        onSearchQueryChanged = onSearchQueryChanged,
+        onRepoClick = onRepoClick,
+        onSaveButtonClick = addToFavourites,
+        selectedRepoId = selectedRepoId,
+        highlightSelectedRepo = highlightSelectedRepo,
         modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        when (uiState) {
-            ReposUiState.Loading ->
-                NiaLoadingWheel(modifier = modifier)
-
-            is ReposUiState.Repos ->
-                ReposTabContent(
-                    repositories = emptyList(), //uiState.repositories,
-                    onRepoClick = onRepoClick,
-                    onSaveButtonClick = addToFavourites,
-                    selectedRepoId = uiState.selectedRepoId,
-                    highlightSelectedRepo = highlightSelectedRepo,
-                    modifier = modifier,
-                )
-
-            is ReposUiState.Empty -> ReposEmptyScreen()
-
-            is ReposUiState.Error -> ReposErrorScreen()
-        }
-    }
+        selectedFilter = selectedFilter,
+        onFilterSelected = onFilterSelected,
+        shouldShowFilter = shouldShowFilter,
+    )
 }
 
 @Composable
@@ -85,12 +91,16 @@ fun PreviewReposScreen() {
     NiaTheme {
         NiaBackground {
             ReposScreen(
-                uiState = ReposUiState.Repos(
-                    selectedRepoId = null,
-                    repositories = PagingData.empty(),
-                ),
                 addToFavourites = { _, _ -> },
                 onRepoClick = {},
+                repositoriesPagingItems = flowOf(PagingData.from(emptyList<Repository>())).collectAsLazyPagingItems(),
+                selectedRepoId = null,
+                highlightSelectedRepo = false,
+                searchQuery = "",
+                onSearchQueryChanged = {},
+                selectedFilter = TimeFrameFilter.CREATED_IN_LAST_DAY,
+                onFilterSelected = {},
+                shouldShowFilter = true,
             )
         }
     }
@@ -102,9 +112,16 @@ fun ReposScreenLoading() {
     NiaTheme {
         NiaBackground {
             ReposScreen(
-                uiState = ReposUiState.Loading,
                 addToFavourites = { _, _ -> },
                 onRepoClick = {},
+                repositoriesPagingItems = flowOf(PagingData.from(emptyList<Repository>())).collectAsLazyPagingItems(),
+                selectedRepoId = null,
+                highlightSelectedRepo = false,
+                searchQuery = "",
+                onSearchQueryChanged = {},
+                selectedFilter = TimeFrameFilter.CREATED_IN_LAST_DAY,
+                onFilterSelected = {},
+                shouldShowFilter = true,
             )
         }
     }
@@ -116,9 +133,16 @@ fun ReposScreenEmpty() {
     NiaTheme {
         NiaBackground {
             ReposScreen(
-                uiState = ReposUiState.Empty,
                 addToFavourites = { _, _ -> },
                 onRepoClick = {},
+                repositoriesPagingItems = flowOf(PagingData.from(emptyList<Repository>())).collectAsLazyPagingItems(),
+                selectedRepoId = null,
+                highlightSelectedRepo = false,
+                searchQuery = "",
+                onSearchQueryChanged = {},
+                selectedFilter = TimeFrameFilter.CREATED_IN_LAST_DAY,
+                onFilterSelected = {},
+                shouldShowFilter = true,
             )
         }
     }

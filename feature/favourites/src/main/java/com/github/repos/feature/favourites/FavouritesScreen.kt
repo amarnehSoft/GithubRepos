@@ -5,6 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.github.repos.feature.repos.ReposScreen
 
 @Composable
@@ -14,10 +15,15 @@ fun FavouritesRoute(
     highlightSelectedRepo: Boolean = false,
     viewModel: FavouritesViewModel = hiltViewModel(),
 ) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val repositoriesPagingItems = viewModel.repositoriesPagingData.collectAsLazyPagingItems()
+    val selectedRepoId by viewModel.selectedRepoId.collectAsStateWithLifecycle()
+    val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
 
     ReposScreen(
-        uiState = uiState,
+        repositoriesPagingItems = repositoriesPagingItems,
+        selectedRepoId = selectedRepoId,
+        searchQuery = searchQuery,
+        onSearchQueryChanged = viewModel::onSearchQueryChanged,
         addToFavourites = { _, _ -> }, // TODO
         onRepoClick = {
             viewModel.onRepoClick(it)
@@ -25,5 +31,6 @@ fun FavouritesRoute(
         },
         highlightSelectedRepo = highlightSelectedRepo,
         modifier = modifier,
+        shouldShowFilter = false,
     )
 }

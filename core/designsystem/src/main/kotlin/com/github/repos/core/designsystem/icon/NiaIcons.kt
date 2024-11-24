@@ -12,6 +12,8 @@ import androidx.compose.material.icons.rounded.BookmarkBorder
 import androidx.compose.material.icons.rounded.Bookmarks
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material.icons.rounded.Error
+import androidx.compose.material.icons.rounded.ErrorOutline
 import androidx.compose.material.icons.rounded.Grid3x3
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.Search
@@ -19,6 +21,7 @@ import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material.icons.rounded.Upcoming
 import androidx.compose.material.icons.rounded.ViewDay
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.github.repos.core.designsystem.R
 
 /**
  * Now in Android icons. Material icons are [ImageVector]s, custom icons are drawable resource IDs.
@@ -41,4 +44,7 @@ object NiaIcons {
     val Upcoming = Icons.Rounded.Upcoming
     val UpcomingBorder = Icons.Outlined.Upcoming
     val ViewDay = Icons.Rounded.ViewDay
+
+    val Error = Icons.Rounded.ErrorOutline
+    val ErrorDrawable = R.drawable.ic_empty_error
 }

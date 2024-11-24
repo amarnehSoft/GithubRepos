@@ -3,7 +3,7 @@ package com.github.repos.core.model.data
 data class Repository(
     val id: Long,
     val name: String,
-    val description: String?,
+    val description: String,
     val stargazersCount: Int,
     val language: String,
     val forks: Int,

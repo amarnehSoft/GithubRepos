@@ -4,6 +4,7 @@ import androidx.tracing.trace
 import com.github.repos.core.network.BuildConfig
 import com.github.repos.core.network.GithubReposNetworkDataSource
 import com.github.repos.core.network.retrofit.RetrofitGithubReposNetwork
+import com.github.repos.core.network.retrofit.interceptors.TokenInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,12 +23,16 @@ internal object NetworkModule {
     @Singleton
     fun providesNetworkJson(): Json = Json {
         ignoreUnknownKeys = true
+        coerceInputValues = true
     }
 
     @Provides
     @Singleton
-    fun okHttpCallFactory(): Call.Factory = trace("NiaOkHttpClient") {
+    fun okHttpCallFactory(
+        tokenInterceptor: TokenInterceptor,
+    ): Call.Factory = trace("NiaOkHttpClient") {
         OkHttpClient.Builder()
+            .addInterceptor(tokenInterceptor)
             .addInterceptor(
                 HttpLoggingInterceptor()
                     .apply {

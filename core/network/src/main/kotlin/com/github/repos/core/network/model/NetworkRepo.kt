@@ -10,32 +10,32 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class GitHubRepositoriesResponse(
     @SerialName("total_count")
-    val totalCount: Int,
-    val items: List<NetworkRepository>
+    val totalCount: Int = 0,
+    val items: List<NetworkRepository> = emptyList(),
 )
 
 @Serializable
 data class NetworkRepository(
     val id: Long,
     val name: String,
-    val description: String?,
+    val description: String = "",
     @SerialName("stargazers_count")
-    val stargazersCount: Int,
-    val language: String,
-    val forks: Int,
+    val stargazersCount: Int = 0,
+    val language: String = "",
+    val forks: Int = 0,
     @SerialName("created_at")
-    val createdAt: String,
+    val createdAt: String = "",
     @SerialName("html_url")
-    val htmlUrl: String,
-    val owner: NetworkOwner,
+    val htmlUrl: String = "",
+    val owner: NetworkOwner = NetworkOwner(),
 )
 
 @Serializable
 data class NetworkOwner(
-    val id: Long,
-    val login: String,
+    val id: Long = -1,
+    val login: String = "",
     @SerialName("avatar_url")
-    val avatarUrl: String?,
+    val avatarUrl: String = "",
 )
 
 fun NetworkRepository.asExternalModel(isFavourite: Boolean): Repository =
@@ -49,6 +49,6 @@ fun NetworkRepository.asExternalModel(isFavourite: Boolean): Repository =
         createdAt = createdAt,
         htmlUrl = htmlUrl,
         ownerUsername = owner.login,
-        ownerAvatarUrl = owner.avatarUrl.orEmpty(),
+        ownerAvatarUrl = owner.avatarUrl,
         isFavourite = isFavourite,
     )

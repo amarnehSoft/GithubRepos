@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
-import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDate
 import javax.inject.Inject
 
 internal class ReposRepositoryImpl @Inject constructor(
@@ -27,7 +27,7 @@ internal class ReposRepositoryImpl @Inject constructor(
 
     override fun searchRepositories(
         query: String,
-        fromDate: Instant,
+        fromDate: LocalDate,
         perPage: Int,
     ): Flow<PagingData<Repository>> {
         val pagerFlow = Pager(

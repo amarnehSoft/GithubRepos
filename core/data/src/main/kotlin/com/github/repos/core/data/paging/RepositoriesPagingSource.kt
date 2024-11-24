@@ -1,18 +1,16 @@
 package com.github.repos.core.data.paging
 
-import android.net.http.HttpException
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.github.repos.core.network.GithubReposNetworkDataSource
 import com.github.repos.core.network.NetworkReposCache
 import com.github.repos.core.network.model.NetworkRepository
-import kotlinx.datetime.Instant
-import java.io.IOException
+import kotlinx.datetime.LocalDate
 
 class RepositoriesPagingSource(
     private val networkDataSource: GithubReposNetworkDataSource,
     private val query: String,
-    private val fromDate: Instant,
+    private val fromDate: LocalDate,
     private val pageSize: Int,
     private val reposCache: NetworkReposCache,
 ) : PagingSource<Int, NetworkRepository>() {
@@ -40,10 +38,8 @@ class RepositoriesPagingSource(
                 prevKey = if (response.hasPrevious) page - 1 else null,
                 nextKey = if (response.hasNext) page + 1 else null
             )
-        } catch (e: IOException) {
-            LoadResult.Error(e) // Handle network error
-        } catch (e: HttpException) {
-            LoadResult.Error(e) // Handle HTTP error
+        } catch (e: Exception) {
+            LoadResult.Error(e)
         }
     }
 
