@@ -17,4 +17,6 @@ interface ReposRepository {
     suspend fun toggleFavorite(repositoryId: Long)
 
     fun getRepositoryById(repositoryId: Long): Flow<Repository?>
+
+    suspend fun removeRepository(repositoryId: Long)
 }

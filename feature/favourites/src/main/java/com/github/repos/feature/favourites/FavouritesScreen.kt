@@ -24,7 +24,7 @@ fun FavouritesRoute(
         selectedRepoId = selectedRepoId,
         searchQuery = searchQuery,
         onSearchQueryChanged = viewModel::onSearchQueryChanged,
-        addToFavourites = { _, _ -> }, // TODO
+        addToFavourites = { repoId, _ -> viewModel.addToFavourites(repoId) },
         onRepoClick = {
             viewModel.onRepoClick(it)
             onRepoClick(it)

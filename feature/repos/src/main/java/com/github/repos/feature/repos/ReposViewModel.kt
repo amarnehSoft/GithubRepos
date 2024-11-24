@@ -7,6 +7,7 @@ import androidx.navigation.toRoute
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.github.repos.core.domain.SearchRepositoriesUseCase
+import com.github.repos.core.domain.ToggleFavouriteUseCase
 import com.github.repos.core.model.data.Repository
 import com.github.repos.feature.repos.navigation.ReposRoute
 import com.github.repos.feature.repos.search.TimeFrameFilter
@@ -30,6 +31,7 @@ import javax.inject.Inject
 class ReposViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     searchRepositoriesUseCase: SearchRepositoriesUseCase,
+    private val toggleFavouriteUseCase: ToggleFavouriteUseCase,
 ) : ViewModel() {
     // Key used to save and retrieve the currently selected topic id from saved state.
     private val selectedRepoIdKey = "selectedRepoIdKey"
@@ -58,7 +60,7 @@ class ReposViewModel @Inject constructor(
 
     fun addToFavourites(repoId: Long, saved: Boolean) {
         viewModelScope.launch {
-            // TODO
+            toggleFavouriteUseCase(repoId)
         }
     }
 

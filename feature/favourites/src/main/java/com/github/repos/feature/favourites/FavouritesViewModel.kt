@@ -7,6 +7,7 @@ import androidx.navigation.toRoute
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.github.repos.core.domain.GetFavouritesUseCase
+import com.github.repos.core.domain.RemoveFavouriteUseCase
 import com.github.repos.core.model.data.Repository
 import com.github.repos.feature.favourites.navigation.FavouritesRoute
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,12 +16,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class FavouritesViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     getFavouritesUseCase: GetFavouritesUseCase,
+    private val removeFavouriteUseCase: RemoveFavouriteUseCase,
 ) : ViewModel() {
     // Key used to save and retrieve the currently selected repo id from saved state.
     private val selectedRepoIdKey = "selectedRepoIdKey"
@@ -49,5 +52,11 @@ class FavouritesViewModel @Inject constructor(
 
     fun onSearchQueryChanged(query: String) {
         _searchQuery.value = query
+    }
+
+    fun addToFavourites(repoId: Long) {
+        viewModelScope.launch {
+            removeFavouriteUseCase(repoId)
+        }
     }
 }
