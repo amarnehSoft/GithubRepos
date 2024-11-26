@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
     lateinit var networkMonitor: NetworkMonitor
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val splashScreen = installSplashScreen()
+        installSplashScreen()
         super.onCreate(savedInstanceState)
 
         // Turn off the decor fitting system windows, which allows us to handle insets,
@@ -38,19 +38,19 @@ class MainActivity : ComponentActivity() {
             // This is the same parameters as the default enableEdgeToEdge call, but we manually
             // resolve whether or not to show dark theme using uiState, since it can be different
             // than the configuration's dark theme value based on the user preference.
-            DisposableEffect(darkTheme) {
-                enableEdgeToEdge(
-                    statusBarStyle = SystemBarStyle.auto(
-                        android.graphics.Color.TRANSPARENT,
-                        android.graphics.Color.TRANSPARENT,
-                    ) { darkTheme },
-                    navigationBarStyle = SystemBarStyle.auto(
-                        lightScrim,
-                        darkScrim,
-                    ) { darkTheme },
-                )
-                onDispose {}
-            }
+//            DisposableEffect(darkTheme) {
+//                enableEdgeToEdge(
+//                    statusBarStyle = SystemBarStyle.auto(
+//                        android.graphics.Color.TRANSPARENT,
+//                        android.graphics.Color.TRANSPARENT,
+//                    ) { darkTheme },
+//                    navigationBarStyle = SystemBarStyle.auto(
+//                        lightScrim,
+//                        darkScrim,
+//                    ) { darkTheme },
+//                )
+//                onDispose {}
+//            }
 
             val appState = rememberAppState(
                 networkMonitor = networkMonitor,

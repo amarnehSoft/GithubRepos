@@ -5,13 +5,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.github.repos.core.domain.GetRepoByIdUseCase
-import com.github.repos.core.domain.ToggleFavouriteUseCase
+import com.github.repos.core.domain.ToggleFavouriteOrAddCachedRepositoryUseCase
 import com.github.repos.core.model.data.Repository
 import com.github.repos.feature.details.navigation.RepoDetailsRoute
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,14 +21,22 @@ import javax.inject.Inject
 class RepoDetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     getRepoById: GetRepoByIdUseCase,
-    private val toggleFavouriteUseCase: ToggleFavouriteUseCase,
+    private val toggleFavouriteUseCase: ToggleFavouriteOrAddCachedRepositoryUseCase,
 ) : ViewModel() {
 
-    val repoId = savedStateHandle.toRoute<RepoDetailsRoute>().id
+    private val repoId = savedStateHandle.toRoute<RepoDetailsRoute>().id
+    private var lastSuccessRepository: Repository? = null
 
     val uiState: StateFlow<RepoDetailsUiState> = getRepoById(repoId)
+        .onEach { repository ->
+            if (repository != null) {
+                lastSuccessRepository = repository
+            }
+        }
         .map { repository ->
-            repository?.let { RepoDetailsUiState.Success(it) } ?: RepoDetailsUiState.Error
+            repository?.let { RepoDetailsUiState.Success(it) }
+                ?: lastSuccessRepository?.let { RepoDetailsUiState.Success(it.copy(isFavourite = false)) }
+                ?: RepoDetailsUiState.Error
         }.stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),
@@ -36,7 +45,9 @@ class RepoDetailsViewModel @Inject constructor(
 
     fun toggleFavourite() {
         viewModelScope.launch {
-            toggleFavouriteUseCase(repoId)
+            lastSuccessRepository?.let {
+                toggleFavouriteUseCase(it)
+            }
         }
     }
 }

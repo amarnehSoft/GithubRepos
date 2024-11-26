@@ -26,7 +26,7 @@ import com.github.repos.core.ui.R
 fun ErrorScreen(
     modifier: Modifier = Modifier,
     errorText: String? = null,
-    onRetry: () -> Unit
+    onRetry: (() -> Unit)? = null,
 ) {
     Column(
         modifier = modifier.fillMaxSize(),
@@ -47,14 +47,16 @@ fun ErrorScreen(
             modifier = Modifier.padding(bottom = 20.dp)
         )
 
-        NiaButton(
-            content = {
-                Text(
-                    text = stringResource(R.string.core_ui_retry)
-                )
-            },
-            onClick = onRetry,
-        )
+        onRetry?.let {
+            NiaButton(
+                content = {
+                    Text(
+                        text = stringResource(R.string.core_ui_retry)
+                    )
+                },
+                onClick = onRetry,
+            )
+        }
     }
 }
 

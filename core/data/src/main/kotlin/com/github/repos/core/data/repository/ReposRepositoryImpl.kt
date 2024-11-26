@@ -79,9 +79,8 @@ internal class ReposRepositoryImpl @Inject constructor(
             }
     }
 
-    override suspend fun toggleFavorite(repositoryId: Long) {
+    override suspend fun toggleFavorite(repositoryId: Long): Boolean {
         val networkRepo = networkReposCache.findRepositoryById(repositoryId)
-        //val repoEntity = networkRepo?.asEntity()
         networkRepo?.let {
             val savedRepo = repoDao.getRepoById(it.id).firstOrNull()
             if (savedRepo != null) {
@@ -90,13 +89,16 @@ internal class ReposRepositoryImpl @Inject constructor(
                 repoDao.insertRepo(it.asEntity())
             }
 
-            return
+            return true
         }
 
         val savedRepo = repoDao.getRepoById(repositoryId).firstOrNull()
         if (savedRepo != null) {
             repoDao.deleteRepo(repositoryId)
+            return true
         }
+
+        return false
     }
 
     override fun getRepositoryById(repositoryId: Long): Flow<Repository?> {
@@ -109,5 +111,9 @@ internal class ReposRepositoryImpl @Inject constructor(
 
     override suspend fun removeRepository(repositoryId: Long) {
         repoDao.deleteRepo(repositoryId)
+    }
+
+    override suspend fun addRepositoryToFavourites(repository: Repository) {
+        repoDao.insertRepo(repository.asEntity())
     }
 }

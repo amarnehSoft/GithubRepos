@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import androidx.annotation.VisibleForTesting
 import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -12,16 +11,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsBottomHeight
-import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -49,14 +44,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.github.repos.core.designsystem.component.NiaBackground
 import com.github.repos.core.designsystem.component.NiaFilterChip
 import com.github.repos.core.designsystem.component.NiaLoadingWheel
-import com.github.repos.core.designsystem.component.scrollbar.DraggableScrollbar
-import com.github.repos.core.designsystem.component.scrollbar.rememberDraggableScroller
-import com.github.repos.core.designsystem.component.scrollbar.scrollbarState
 import com.github.repos.core.designsystem.icon.NiaIcons
 import com.github.repos.core.designsystem.theme.NiaTheme
 import com.github.repos.core.model.data.Repository
-import com.github.repos.core.ui.DevicePreviews
 import com.github.repos.core.ui.CachedDynamicAsyncImage
+import com.github.repos.core.ui.DevicePreviews
+import com.github.repos.core.ui.states.ErrorScreen
 
 @Composable
 fun RepoDetailsScreen(
@@ -214,7 +207,10 @@ internal fun RepoDetailsScreen(
                     )
                 }
 
-                RepoDetailsUiState.Error -> TODO()
+                RepoDetailsUiState.Error -> item {
+                    ErrorScreen()
+                }
+
                 is RepoDetailsUiState.Success -> {
                     item {
                         RepoDetailsToolbar(

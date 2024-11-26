@@ -14,9 +14,11 @@ interface ReposRepository {
 
     fun getFavourites(perPage: Int, query: String): Flow<PagingData<Repository>>
 
-    suspend fun toggleFavorite(repositoryId: Long)
+    suspend fun toggleFavorite(repositoryId: Long): Boolean
 
     fun getRepositoryById(repositoryId: Long): Flow<Repository?>
 
     suspend fun removeRepository(repositoryId: Long)
+
+    suspend fun addRepositoryToFavourites(repository: Repository)
 }
