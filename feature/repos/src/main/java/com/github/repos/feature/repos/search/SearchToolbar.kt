@@ -1,16 +1,24 @@
 package com.github.repos.feature.repos.search
 
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -84,9 +92,17 @@ private fun RowScope.SearchTextField(
             disabledIndicatorColor = Color.Transparent,
         ),
         leadingIcon = {
-            AnimatedContent(targetState = isSearching, label = "") {
+            AnimatedContent(
+                targetState = isSearching,
+                transitionSpec = {
+                    (fadeIn(animationSpec = tween(220, delayMillis = 90))).togetherWith(fadeOut(animationSpec = tween(90)))
+                },
+                label = "",
+            ) {
                 if (it) {
-                    NiaLoadingWheel()
+                    NiaLoadingWheel(
+                        modifier = Modifier.size(40.dp),
+                    )
                 } else {
                     Icon(
                         imageVector = NiaIcons.Search,
@@ -97,7 +113,11 @@ private fun RowScope.SearchTextField(
             }
         },
         trailingIcon = {
-            if (searchQuery.isNotEmpty()) {
+            AnimatedVisibility(
+                visible = searchQuery.isNotEmpty(),
+                enter = fadeIn(),
+                exit = fadeOut(),
+            ) {
                 IconButton(
                     onClick = {
                         onSearchQueryChanged("")
@@ -128,6 +148,12 @@ private fun RowScope.SearchTextField(
             },
         shape = RoundedCornerShape(32.dp),
         value = searchQuery,
+        placeholder = {
+            Text(
+                text = "Search",
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+            )
+        },
         keyboardOptions = KeyboardOptions(
             imeAction = ImeAction.Search,
         ),

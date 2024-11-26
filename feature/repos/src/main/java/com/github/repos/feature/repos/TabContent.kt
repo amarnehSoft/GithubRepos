@@ -26,6 +26,7 @@ import com.github.repos.core.designsystem.component.scrollbar.rememberDraggableS
 import com.github.repos.core.designsystem.component.scrollbar.scrollbarState
 import com.github.repos.core.model.data.Repository
 import com.github.repos.core.ui.pagingItems
+import com.github.repos.core.ui.states.EmptyScreen
 import com.github.repos.feature.repos.search.SearchToolbar
 import com.github.repos.feature.repos.search.TimeFrameFilter
 
@@ -88,6 +89,9 @@ fun ReposTabContent(
                             onFavouriteToggleClick = { onSaveButtonClick(repoId, it) },
                             ownerAvatarUrl = repo.ownerAvatarUrl,
                         )
+                    },
+                    emptyState = {
+                        EmptyScreen()
                     },
                 )
 

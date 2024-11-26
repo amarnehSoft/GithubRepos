@@ -15,8 +15,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Unspecified
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.unit.dp
+import coil.ImageLoader
 import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter.State.Error
 import coil.compose.AsyncImagePainter.State.Loading
@@ -31,6 +33,7 @@ fun DynamicAsyncImage(
     model: Any?,
     contentDescription: String?,
     modifier: Modifier = Modifier,
+    imageLoader: ImageLoader = ImageLoader(LocalContext.current),
     // placeholder: Painter = painterResource(R.drawable.core_designsystem_ic_placeholder_default),
 ) {
     val iconTint = LocalTintTheme.current.iconTint
@@ -42,6 +45,7 @@ fun DynamicAsyncImage(
             isLoading = state is Loading
             isError = state is Error
         },
+        imageLoader = imageLoader,
     )
     val isLocalInspection = LocalInspectionMode.current
     Box(

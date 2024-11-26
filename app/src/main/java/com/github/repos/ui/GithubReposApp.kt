@@ -52,7 +52,8 @@ fun GithubReposApp(
     modifier: Modifier = Modifier,
     windowAdaptiveInfo: WindowAdaptiveInfo = currentWindowAdaptiveInfo(),
 ) {
-    val shouldShowGradientBackground = appState.currentTopLevelDestination == TopLevelDestination.REPOS
+    val shouldShowGradientBackground =
+        appState.currentTopLevelDestination == TopLevelDestination.REPOS
 
     NiaBackground(modifier = modifier) {
         NiaGradientBackground(
@@ -145,35 +146,21 @@ internal fun GithubReposApp(
             ) {
                 // Show the top app bar on top level destinations.
                 val destination = appState.currentTopLevelDestination
-                var shouldShowTopAppBar = false
 
-                if (destination != null) {
-                    shouldShowTopAppBar = true
-                    NiaTopAppBar(
-                        titleRes = destination.titleTextId,
-                        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                            containerColor = Color.Transparent,
-                        ),
-                    )
-                }
+                NiaTopAppBar(
+                    titleRes = destination?.titleTextId ?: R.string.app_name,
+                    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                        containerColor = Color.Transparent,
+                    ),
+                )
 
                 Box(
-                    // Workaround for https://issuetracker.google.com/338478720
-                    modifier = Modifier.consumeWindowInsets(
-                        if (shouldShowTopAppBar) {
-                            WindowInsets.safeDrawing.only(WindowInsetsSides.Top)
-                        } else {
-                            WindowInsets(0, 0, 0, 0)
-                        },
-                    ),
+                    modifier = Modifier.consumeWindowInsets(WindowInsets(0, 0, 0, 0))
                 ) {
                     AppNavHost(
                         appState = appState,
                     )
                 }
-
-                // TODO: We may want to add padding or spacer when the snackbar is shown so that
-                //  content doesn't display behind it.
             }
         }
     }

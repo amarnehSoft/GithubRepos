@@ -81,14 +81,21 @@ internal class ReposRepositoryImpl @Inject constructor(
 
     override suspend fun toggleFavorite(repositoryId: Long) {
         val networkRepo = networkReposCache.findRepositoryById(repositoryId)
-        val repoEntity = networkRepo?.asEntity()
-        repoEntity?.let {
+        //val repoEntity = networkRepo?.asEntity()
+        networkRepo?.let {
             val savedRepo = repoDao.getRepoById(it.id).firstOrNull()
             if (savedRepo != null) {
                 repoDao.deleteRepo(it.id)
             } else {
-                repoDao.insertRepo(it)
+                repoDao.insertRepo(it.asEntity())
             }
+
+            return
+        }
+
+        val savedRepo = repoDao.getRepoById(repositoryId).firstOrNull()
+        if (savedRepo != null) {
+            repoDao.deleteRepo(repositoryId)
         }
     }
 

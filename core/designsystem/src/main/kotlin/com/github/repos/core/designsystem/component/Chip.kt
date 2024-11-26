@@ -31,6 +31,16 @@ fun NiaFilterChip(
     onSelectedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    leadingIcon: @Composable (() -> Unit)? = {
+        if (selected) {
+            Icon(
+                imageVector = NiaIcons.Check,
+                contentDescription = null,
+            )
+        } else {
+            null
+        }
+    },
     label: @Composable () -> Unit,
 ) {
     FilterChip(
@@ -43,16 +53,7 @@ fun NiaFilterChip(
         },
         modifier = modifier,
         enabled = enabled,
-        leadingIcon = if (selected) {
-            {
-                Icon(
-                    imageVector = NiaIcons.Check,
-                    contentDescription = null,
-                )
-            }
-        } else {
-            null
-        },
+        leadingIcon = leadingIcon,
         shape = CircleShape,
         border = FilterChipDefaults.filterChipBorder(
             enabled = enabled,

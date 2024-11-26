@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.github.repos.core.model.data.Repository
+import kotlinx.datetime.Instant
 
 @Entity(
     tableName = "favourite_repos",

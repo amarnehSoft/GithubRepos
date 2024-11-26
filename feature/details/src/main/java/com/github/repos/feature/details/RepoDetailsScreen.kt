@@ -1,6 +1,9 @@
 package com.github.repos.feature.details
 
+import android.content.Intent
+import android.net.Uri
 import androidx.annotation.VisibleForTesting
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
@@ -22,9 +25,7 @@ import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CalendarToday
 import androidx.compose.material.icons.filled.Code
 import androidx.compose.material.icons.filled.ForkRight
 import androidx.compose.material.icons.filled.Star
@@ -37,16 +38,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import coil.request.ImageRequest
-import coil.transform.CircleCropTransformation
-import com.github.repos.core.designsystem.component.DynamicAsyncImage
 import com.github.repos.core.designsystem.component.NiaBackground
 import com.github.repos.core.designsystem.component.NiaFilterChip
 import com.github.repos.core.designsystem.component.NiaLoadingWheel
@@ -57,6 +56,7 @@ import com.github.repos.core.designsystem.icon.NiaIcons
 import com.github.repos.core.designsystem.theme.NiaTheme
 import com.github.repos.core.model.data.Repository
 import com.github.repos.core.ui.DevicePreviews
+import com.github.repos.core.ui.CachedDynamicAsyncImage
 
 @Composable
 fun RepoDetailsScreen(
@@ -71,29 +71,14 @@ fun RepoDetailsScreen(
         uiState = uiState,
         showBackButton = showBackButton,
         onBackClick = onBackClick,
-        onSaveClick = {},
+        onSaveClick = { viewModel.toggleFavourite() },
         modifier = modifier,
     )
 }
 
-// DynamicAsyncImage(
-//                model = ImageRequest.Builder(LocalContext.current)
-//                    .data(repository.ownerAvatarUrl)
-//                    .crossfade(true)
-//                    .transformations(CircleCropTransformation())
-//                    .build(),
-//                contentDescription = "Owner Avatar",
-//                modifier = Modifier
-//                    .size(64.dp)
-//                    .padding(end = 16.dp)
-//                    .clip(CircleShape)
-//            )
-
 @Composable
 fun RepositoryDetailsScreen(
     repository: Repository,
-    onFavouriteClick: (Boolean) -> Unit,
-    onOpenWebClick: (String) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -102,17 +87,12 @@ fun RepositoryDetailsScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // Owner Info
-        Row(verticalAlignment = Alignment.CenterVertically,) {
-            DynamicAsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(repository.ownerAvatarUrl)
-                    .crossfade(true)
-                    .transformations(CircleCropTransformation())
-                    .build(),
-                contentDescription = "Owner Avatar",
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            CachedDynamicAsyncImage(
+                url = repository.ownerAvatarUrl,
                 modifier = Modifier
                     .size(64.dp)
-                    .clip(CircleShape)
+                //.clip(CircleShape),
             )
             Spacer(modifier = Modifier.width(16.dp))
             Column {
@@ -136,12 +116,7 @@ fun RepositoryDetailsScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Text(
-            text = repository.description,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        )
+        DescriptionText(text = repository.description)
 
         Spacer(modifier = Modifier.height(32.dp))
 
@@ -159,21 +134,28 @@ fun RepositoryDetailsScreen(
                 label = "Forks",
                 value = repository.forks.toString()
             )
-            RepositoryAttribute(
-                icon = Icons.Default.Code,
-                label = "Language",
-                value = repository.language
-            )
+
+            if (repository.language.isNotBlank()) {
+                RepositoryAttribute(
+                    icon = Icons.Default.Code,
+                    label = "Language",
+                    value = repository.language
+                )
+            }
         }
 
         Spacer(modifier = Modifier.height(32.dp))
 
+        val context = LocalContext.current
         // Favourite and Open in Browser
         Row(
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier.fillMaxWidth()
         ) {
-            OutlinedButton(onClick = { onOpenWebClick(repository.htmlUrl) }) {
+            OutlinedButton(onClick = {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(repository.htmlUrl))
+                context.startActivity(intent)
+            }) {
                 Text(text = "Open in Browser")
             }
         }
@@ -225,9 +207,6 @@ internal fun RepoDetailsScreen(
             state = state,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            item {
-                Spacer(Modifier.windowInsetsTopHeight(WindowInsets.safeDrawing))
-            }
             when (uiState) {
                 RepoDetailsUiState.Loading -> item {
                     NiaLoadingWheel(
@@ -254,31 +233,7 @@ internal fun RepoDetailsScreen(
                 Spacer(Modifier.windowInsetsBottomHeight(WindowInsets.safeDrawing))
             }
         }
-        val itemsAvailable = topicItemsSize(uiState)
-        val scrollbarState = state.scrollbarState(
-            itemsAvailable = itemsAvailable,
-        )
-        state.DraggableScrollbar(
-            modifier = Modifier
-                .fillMaxHeight()
-                .windowInsetsPadding(WindowInsets.systemBars)
-                .padding(horizontal = 2.dp)
-                .align(Alignment.CenterEnd),
-            state = scrollbarState,
-            orientation = Orientation.Vertical,
-            onThumbMoved = state.rememberDraggableScroller(
-                itemsAvailable = itemsAvailable,
-            ),
-        )
     }
-}
-
-private fun topicItemsSize(
-    uiState: RepoDetailsUiState
-) = when (uiState) {
-    RepoDetailsUiState.Error -> 0 // Nothing
-    RepoDetailsUiState.Loading -> 1 // Loading bar
-    is RepoDetailsUiState.Success -> 2
 }
 
 private fun LazyListScope.topicBody(
@@ -287,8 +242,6 @@ private fun LazyListScope.topicBody(
     item {
         RepositoryDetailsScreen(
             repository = repository,
-            onFavouriteClick = {},
-            onOpenWebClick = {}
         )
     }
 }
@@ -328,21 +281,31 @@ private fun RepoDetailsToolbar(
             NiaFilterChip(
                 selected = selected,
                 onSelectedChange = onFollowClick,
-                modifier = Modifier.padding(end = 24.dp),
-            ) {
-                if (selected) {
-                    Text("FOLLOWING")
-                } else {
-                    Text("NOT FOLLOWING")
+                modifier = Modifier
+                    .animateContentSize()
+                    .padding(end = 24.dp),
+                label = {
+                    if (selected) {
+                        Text("Added to Favourites")
+                    } else {
+                        Text("Add to Favourites")
+                    }
+                },
+                leadingIcon = {
+                    if (selected) {
+                        Icon(
+                            imageVector = NiaIcons.Favorite,
+                            contentDescription = null,
+                        )
+                    } else {
+                        Icon(
+                            imageVector = NiaIcons.FavoriteBorder,
+                            contentDescription = null,
+                        )
+                    }
                 }
-            }
+            )
         }
-
-//        Text(
-//            text = repository.name,
-//            style = MaterialTheme.typography.displayLarge,
-//            modifier = Modifier.padding(horizontal = 24.dp),
-//        )
     }
 }
 
@@ -358,5 +321,26 @@ fun TopicScreenLoading() {
                 onSaveClick = {},
             )
         }
+    }
+}
+
+@Composable
+private fun ColumnScope.DescriptionText(
+    text: String,
+) {
+    if (text.isNotBlank()) {
+        Text(
+            text = text,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        )
+    } else {
+        Text(
+            text = stringResource(id = com.github.repos.core.ui.R.string.core_ui_no_description),
+            style = MaterialTheme.typography.bodyMedium.copy(fontStyle = FontStyle.Italic),
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
     }
 }

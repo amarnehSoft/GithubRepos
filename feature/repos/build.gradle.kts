@@ -17,4 +17,6 @@ dependencies {
     implementation(libs.androidx.compose.material3.adaptive.navigation)
 
     implementation(libs.androidx.paging.compose)
+    implementation(libs.coil.kt.compose)
+    implementation(libs.androidx.navigation.compose)
 }

@@ -3,13 +3,7 @@ package com.github.repos.core.network.retrofit
 import com.github.repos.core.network.GithubReposNetworkDataSource
 import com.github.repos.core.network.model.GitHubRepositoriesResponse
 import com.github.repos.core.network.model.SearchRepositoriesResponse
-import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.format
-import kotlinx.datetime.format.DateTimeComponents
-import kotlinx.datetime.format.DateTimeFormat
-import kotlinx.datetime.toLocalDateTime
 import kotlinx.serialization.json.Json
 import okhttp3.Call
 import okhttp3.MediaType.Companion.toMediaType
@@ -28,7 +22,7 @@ private interface RetrofitGithubReposNetworkApi {
 
     @GET("search/repositories")
     suspend fun searchRepositories(
-        @Query("q") query: String,
+        @Query("q", encoded = true) query: String,
         @Query("sort") sort: String,
         @Query("order") order: String,
         @Query("per_page") perPage: Int,
@@ -64,7 +58,7 @@ internal class RetrofitGithubReposNetwork @Inject constructor(
         fromDate: LocalDate,
     ): SearchRepositoriesResponse {
         // TODO: format date correctly
-        val query = searchQuery + if (searchQuery.isNotBlank()) "+" else "" + "created:>${fromDate}"
+        val query = searchQuery + (if (searchQuery.isNotBlank()) " in:name in:description+" else "") + "created:>${fromDate}"
         val response = networkApi.searchRepositories(
             query = query,
             page = page,

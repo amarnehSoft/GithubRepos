@@ -11,10 +11,12 @@ import com.github.repos.core.domain.RemoveFavouriteUseCase
 import com.github.repos.core.model.data.Repository
 import com.github.repos.feature.favourites.navigation.FavouritesRoute
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -38,8 +40,9 @@ class FavouritesViewModel @Inject constructor(
     private val _searchQuery = MutableStateFlow("")
     val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
 
+    @OptIn(FlowPreview::class)
     val repositoriesPagingData: Flow<PagingData<Repository>> =
-        searchQuery.flatMapLatest {
+        searchQuery.debounce(300L).flatMapLatest {
             getFavouritesUseCase(
                 query = it,
                 perPage = 30,

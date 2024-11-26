@@ -26,80 +26,64 @@ fun <T : Any> LazyListScope.pagingItems(
     },
     initialErrorState: @Composable LazyItemScope.() -> Unit = {
         ErrorScreen(
-            Modifier.fillParentMaxSize(),
-            onRetry = {
-                items.retry()
-            },
+            modifier = Modifier.fillParentMaxSize(),
+            onRetry = { items.retry() },
         )
     },
     nextPageLoadingErrorState: @Composable LazyItemScope.() -> Unit = {
-        ErrorRow(
-            onRetry = {
-                items.retry()
-            },
-        )
+        ErrorRow(onRetry = { items.retry() })
     },
 ) {
     val refreshLoadState = items.loadState.source.refresh
     val appendLoadState = items.loadState.source.append
 
-    when {
-        refreshLoadState is LoadState.NotLoading &&
-            appendLoadState is LoadState.NotLoading &&
-            appendLoadState.endOfPaginationReached &&
-            items.itemCount == 0 -> {
-            // data loaded and we had 0 results...
-            emptyState?.let {
-                item { emptyState() }
-            }
+    // Empty state handling
+    if (refreshLoadState is LoadState.NotLoading &&
+        appendLoadState is LoadState.NotLoading &&
+        appendLoadState.endOfPaginationReached &&
+        items.itemCount == 0) {
+        emptyState?.let {
+            item { emptyState() }
         }
-
-        refreshLoadState is LoadState.Loading && items.itemCount == 0 -> {
-            // first fetch of data is loading...
-            item { initialLoadState() }
-        }
-
-        refreshLoadState is LoadState.Error -> {
-            // error occurred with initial loading of data...
-            item { initialErrorState() }
-        }
-
-        else -> {
-            items(
-                count = items.itemCount,
-                key = items.itemKey(key = key),
-                contentType = items.itemContentType(),
-                itemContent = {
-                    itemContent(it, items[it])
-                }
-            )
-        }
+        return
     }
 
-    when {
-        appendLoadState is LoadState.Loading -> {
-            // next page of data is loading...
-            item { nextPageLoadingState() }
-        }
+    // Initial loading state handling
+    if (refreshLoadState is LoadState.Loading && items.itemCount == 0) {
+        item { initialLoadState() }
+        return
+    }
 
-        appendLoadState is LoadState.Error -> {
-            // error occurred when loading next page of data...
-            item { nextPageLoadingErrorState() }
-        }
+    // Initial error state handling
+    if (refreshLoadState is LoadState.Error) {
+        item { initialErrorState() }
+        return
+    }
 
-        refreshLoadState is LoadState.NotLoading &&
-            appendLoadState is LoadState.NotLoading &&
-            appendLoadState.endOfPaginationReached -> {
-            // last page
-            endOfPaginationState?.let {
-                item { endOfPaginationState() }
-            }
+    // Display items
+    items(
+        count = items.itemCount,
+        key = key?.let { items.itemKey(key = it) },
+        contentType = items.itemContentType(),
+        itemContent = { index -> itemContent(index, items[index]) }
+    )
+
+    // Next page loading state handling
+    if (appendLoadState is LoadState.Loading) {
+        item { nextPageLoadingState() }
+    }
+
+    // Next page error state handling
+    if (appendLoadState is LoadState.Error) {
+        item { nextPageLoadingErrorState() }
+    }
+
+    // End of pagination state handling
+    if (refreshLoadState is LoadState.NotLoading &&
+        appendLoadState is LoadState.NotLoading &&
+        appendLoadState.endOfPaginationReached) {
+        endOfPaginationState?.let {
+            item { endOfPaginationState() }
         }
     }
 }
-
-fun <T : Any> LazyPagingItems<T>.shouldShowPullRefreshIndicator() =
-    loadState.source.refresh == LoadState.Loading && itemCount > 0
-
-fun <T : Any> LazyPagingItems<T>.shouldEnablePullRefresh() =
-    loadState.source.refresh != LoadState.Loading && loadState.source.refresh !is LoadState.Error

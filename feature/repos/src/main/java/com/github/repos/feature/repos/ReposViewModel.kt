@@ -12,11 +12,13 @@ import com.github.repos.core.model.data.Repository
 import com.github.repos.feature.repos.navigation.ReposRoute
 import com.github.repos.feature.repos.search.TimeFrameFilter
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
@@ -48,8 +50,9 @@ class ReposViewModel @Inject constructor(
     private val _timeFrameFilter = MutableStateFlow(TimeFrameFilter.CREATED_IN_LAST_DAY)
     val timeFrameFilter: StateFlow<TimeFrameFilter> = _timeFrameFilter.asStateFlow()
 
+    @OptIn(FlowPreview::class)
     val repositoriesPagingData: Flow<PagingData<Repository>> =
-        combine(searchQuery, timeFrameFilter, ::Pair)
+        combine(searchQuery.debounce(300L), timeFrameFilter, ::Pair)
             .flatMapLatest { (query, filter) ->
                 searchRepositoriesUseCase(
                     query = query,

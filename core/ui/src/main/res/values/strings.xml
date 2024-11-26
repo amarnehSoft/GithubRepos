@@ -2,4 +2,7 @@
 <resources>
     <string name="core_ui_something_went_wrong">Something went wrong. Please try again.</string>
     <string name="core_ui_retry">Retry</string>
+    <string name="core_ui_no_description">No description</string>
+    <string name="core_ui_select_a_repo">Select a Repository</string>
+    <string name="core_ui_empty_result">No repositories found</string>
 </resources>

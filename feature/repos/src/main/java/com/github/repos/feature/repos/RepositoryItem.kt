@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
@@ -20,9 +21,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -30,6 +34,7 @@ import com.github.repos.core.designsystem.component.DynamicAsyncImage
 import com.github.repos.core.designsystem.component.NiaIconToggleButton
 import com.github.repos.core.designsystem.icon.NiaIcons
 import com.github.repos.core.designsystem.theme.NiaTheme
+import com.github.repos.core.ui.CachedDynamicAsyncImage
 
 @Composable
 fun RepositoryItem(
@@ -47,7 +52,12 @@ fun RepositoryItem(
 ) {
     ListItem(
         leadingContent = {
-            OwnerAvatar(imageUrl = ownerAvatarUrl, iconModifier.size(48.dp))
+            OwnerAvatar(
+                imageUrl = ownerAvatarUrl,
+                iconModifier
+                    .size(48.dp)
+                    .clip(CircleShape)
+            )
         },
         headlineContent = {
             Column {
@@ -61,12 +71,7 @@ fun RepositoryItem(
         },
         supportingContent = {
             Column {
-                Text(
-                    text = description,
-                    style = MaterialTheme.typography.bodyMedium,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
-                )
+                DescriptionText(text = description)
                 Spacer(modifier = Modifier.height(4.dp))
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
@@ -90,13 +95,13 @@ fun RepositoryItem(
                 onCheckedChange = onFavouriteToggleClick,
                 icon = {
                     Icon(
-                        imageVector = NiaIcons.Add,
+                        imageVector = NiaIcons.FavoriteBorder,
                         contentDescription = "",
                     )
                 },
                 checkedIcon = {
                     Icon(
-                        imageVector = NiaIcons.Check,
+                        imageVector = NiaIcons.Favorite,
                         contentDescription = "",
                     )
                 },
@@ -191,5 +196,25 @@ private fun RepositoryCardLongDescriptionPreview() {
                 onFavouriteToggleClick = {},
             )
         }
+    }
+}
+
+@Composable
+private fun DescriptionText(
+    text: String,
+) {
+    if (text.isNotBlank()) {
+        Text(
+            text = text,
+            style = MaterialTheme.typography.bodyMedium,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis
+        )
+    } else {
+        Text(
+            text = stringResource(id = com.github.repos.core.ui.R.string.core_ui_no_description),
+            style = MaterialTheme.typography.bodyMedium.copy(fontStyle = FontStyle.Italic),
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
     }
 }

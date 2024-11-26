@@ -25,7 +25,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.github.repos.feature.details.RepoDetailPlaceholder
+import com.github.repos.core.ui.RepoDetailPlaceholder
 import com.github.repos.feature.details.navigation.RepoDetailsRoute
 import com.github.repos.feature.details.navigation.navigateToRepoDetails
 import com.github.repos.feature.details.navigation.repoDetailsScreen

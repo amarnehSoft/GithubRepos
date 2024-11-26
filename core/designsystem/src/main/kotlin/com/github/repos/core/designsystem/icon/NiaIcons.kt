@@ -14,6 +14,8 @@ import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Error
 import androidx.compose.material.icons.rounded.ErrorOutline
+import androidx.compose.material.icons.rounded.Favorite
+import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material.icons.rounded.Grid3x3
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.Search
@@ -47,4 +49,8 @@ object NiaIcons {
 
     val Error = Icons.Rounded.ErrorOutline
     val ErrorDrawable = R.drawable.ic_empty_error
+    val RepoDrawable = R.drawable.ic_repo
+
+    val Favorite = Icons.Rounded.Favorite
+    val FavoriteBorder = Icons.Rounded.FavoriteBorder
 }
