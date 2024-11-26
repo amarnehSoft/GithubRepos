@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     `kotlin-dsl`
@@ -65,10 +64,6 @@ gradlePlugin {
         register("androidRoom") {
             id = "githubRepos.android.room"
             implementationClass = "AndroidRoomConventionPlugin"
-        }
-        register("androidLint") {
-            id = "githubRepos.android.lint"
-            implementationClass = "AndroidLintConventionPlugin"
         }
         register("jvmLibrary") {
             id = "githubRepos.jvm.library"

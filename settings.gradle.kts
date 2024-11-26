@@ -14,7 +14,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "GithupRepos"
+rootProject.name = "GithubRepos"
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")

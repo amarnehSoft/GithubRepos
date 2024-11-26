@@ -1,6 +1,5 @@
 package com.github.repos.core.network.di
 
-import androidx.tracing.trace
 import com.github.repos.core.network.BuildConfig
 import com.github.repos.core.network.GithubReposNetworkDataSource
 import com.github.repos.core.network.retrofit.RetrofitGithubReposNetwork
@@ -30,19 +29,17 @@ internal object NetworkModule {
     @Singleton
     fun okHttpCallFactory(
         tokenInterceptor: TokenInterceptor,
-    ): Call.Factory = trace("NiaOkHttpClient") {
-        OkHttpClient.Builder()
-            .addInterceptor(tokenInterceptor)
-            .addInterceptor(
-                HttpLoggingInterceptor()
-                    .apply {
-                        if (BuildConfig.DEBUG) {
-                            setLevel(HttpLoggingInterceptor.Level.BODY)
-                        }
-                    },
-            )
-            .build()
-    }
+    ): Call.Factory = OkHttpClient.Builder()
+        .addInterceptor(tokenInterceptor)
+        .addInterceptor(
+            HttpLoggingInterceptor()
+                .apply {
+                    if (BuildConfig.DEBUG) {
+                        setLevel(HttpLoggingInterceptor.Level.BODY)
+                    }
+                },
+        )
+        .build()
 
     @Provides
     @Singleton
