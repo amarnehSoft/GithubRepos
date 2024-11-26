@@ -28,7 +28,7 @@ import com.github.repos.core.designsystem.theme.LocalTintTheme
  */
 @Composable
 fun DynamicAsyncImage(
-    imageUrl: String,
+    model: Any?,
     contentDescription: String?,
     modifier: Modifier = Modifier,
     // placeholder: Painter = painterResource(R.drawable.core_designsystem_ic_placeholder_default),
@@ -37,7 +37,7 @@ fun DynamicAsyncImage(
     var isLoading by remember { mutableStateOf(true) }
     var isError by remember { mutableStateOf(false) }
     val imageLoader = rememberAsyncImagePainter(
-        model = imageUrl,
+        model = model,
         onState = { state ->
             isLoading = state is Loading
             isError = state is Error

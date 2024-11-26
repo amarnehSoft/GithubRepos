@@ -130,7 +130,7 @@ private fun OwnerAvatar(imageUrl: String, modifier: Modifier = Modifier) {
         )
     } else {
         DynamicAsyncImage(
-            imageUrl = imageUrl,
+            model = imageUrl,
             contentDescription = null,
             modifier = modifier,
         )
