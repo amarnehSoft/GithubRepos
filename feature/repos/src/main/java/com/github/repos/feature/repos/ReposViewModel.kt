@@ -61,7 +61,7 @@ class ReposViewModel @Inject constructor(
                 )
             }.cachedIn(viewModelScope)
 
-    fun addToFavourites(repoId: Long, saved: Boolean) {
+    fun toggleFavourite(repoId: Long) {
         viewModelScope.launch {
             toggleFavouriteUseCase(repoId)
         }
@@ -81,12 +81,10 @@ class ReposViewModel @Inject constructor(
 }
 
 private fun TimeFrameFilter.fromDate(): LocalDate {
-    // Get the current date
     val today = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
-
     return when (this) {
         TimeFrameFilter.CREATED_IN_LAST_DAY -> today.minus(1, DateTimeUnit.DAY)
-        TimeFrameFilter.CREATED_IN_LAST_WEEK -> today.minus(7, DateTimeUnit.DAY)
+        TimeFrameFilter.CREATED_IN_LAST_WEEK -> today.minus(1, DateTimeUnit.WEEK)
         TimeFrameFilter.CREATED_IN_LAST_MONTH -> today.minus(1, DateTimeUnit.MONTH)
     }
 }

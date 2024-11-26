@@ -5,13 +5,13 @@ import androidx.compose.animation.ExitTransition
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.github.repos.feature.favourites.navigation.FavouritesRoute
-import com.github.repos.feature.favourites.repos2pane.FavouriteReposListDetailScreen
+import com.github.repos.feature.favourites.repos2pane.FavouritesListDetailScreen
 
-fun NavGraphBuilder.favouriteReposListDetailScreen() {
+fun NavGraphBuilder.favouriteListDetailScreen() {
     composable<FavouritesRoute>(
         enterTransition = { EnterTransition.None },
         exitTransition = { ExitTransition.None },
     ) {
-        FavouriteReposListDetailScreen()
+        FavouritesListDetailScreen()
     }
 }

@@ -8,11 +8,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.github.repos.core.designsystem.icon.NiaIcons
-import com.github.repos.core.designsystem.theme.NiaTheme
+import com.github.repos.core.designsystem.icon.GithubIcons
+import com.github.repos.core.designsystem.theme.GithubTheme
 
 /**
- * Now in Android toggle button with icon and checked icon content slots. Wraps Material 3
+ * Github toggle button with icon and checked icon content slots. Wraps Material 3
  * [IconButton].
  *
  * @param checked Whether the toggle button is currently checked.
@@ -24,7 +24,7 @@ import com.github.repos.core.designsystem.theme.NiaTheme
  * @param checkedIcon The icon content to show when checked.
  */
 @Composable
-fun NiaIconToggleButton(
+fun GithubIconToggleButton(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
@@ -42,7 +42,7 @@ fun NiaIconToggleButton(
             checkedContentColor = MaterialTheme.colorScheme.primary,
             disabledContainerColor = if (checked) {
                 MaterialTheme.colorScheme.onBackground.copy(
-                    alpha = NiaIconButtonDefaults.DISABLED_ICON_BUTTON_CONTAINER_ALPHA,
+                    alpha = GithubIconButtonDefaults.DISABLED_ICON_BUTTON_CONTAINER_ALPHA,
                 )
             } else {
                 Color.Transparent
@@ -56,19 +56,19 @@ fun NiaIconToggleButton(
 @ThemePreviews
 @Composable
 fun IconButtonPreview() {
-    NiaTheme {
-        NiaIconToggleButton(
+    GithubTheme {
+        GithubIconToggleButton(
             checked = true,
             onCheckedChange = { },
             icon = {
                 Icon(
-                    imageVector = NiaIcons.BookmarkBorder,
+                    imageVector = GithubIcons.BookmarkBorder,
                     contentDescription = null,
                 )
             },
             checkedIcon = {
                 Icon(
-                    imageVector = NiaIcons.Bookmark,
+                    imageVector = GithubIcons.Bookmark,
                     contentDescription = null,
                 )
             },
@@ -79,19 +79,19 @@ fun IconButtonPreview() {
 @ThemePreviews
 @Composable
 fun IconButtonPreviewUnchecked() {
-    NiaTheme {
-        NiaIconToggleButton(
+    GithubTheme {
+        GithubIconToggleButton(
             checked = false,
             onCheckedChange = { },
             icon = {
                 Icon(
-                    imageVector = NiaIcons.BookmarkBorder,
+                    imageVector = GithubIcons.BookmarkBorder,
                     contentDescription = null,
                 )
             },
             checkedIcon = {
                 Icon(
-                    imageVector = NiaIcons.Bookmark,
+                    imageVector = GithubIcons.Bookmark,
                     contentDescription = null,
                 )
             },
@@ -100,10 +100,8 @@ fun IconButtonPreviewUnchecked() {
 }
 
 /**
- * Now in Android icon button default values.
+ * Github icon button default values.
  */
-object NiaIconButtonDefaults {
-    // TODO: File bug
-    // IconToggleButton disabled container alpha not exposed by IconButtonDefaults
+object GithubIconButtonDefaults {
     const val DISABLED_ICON_BUTTON_CONTAINER_ALPHA = 0.12f
 }

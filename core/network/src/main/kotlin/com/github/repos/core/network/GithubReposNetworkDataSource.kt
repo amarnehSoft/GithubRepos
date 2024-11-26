@@ -1,7 +1,6 @@
 package com.github.repos.core.network
 
 import com.github.repos.core.network.model.SearchRepositoriesResponse
-import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
 
 /**

@@ -85,7 +85,7 @@ internal fun ReposListDetailScreen(
     }
 
     var nestedNavHostStartRoute by remember {
-        val route = selectedRepoId?.let { RepoDetailsRoute(id = it) } ?: TopicPlaceholderRoute
+        val route = selectedRepoId?.let { RepoDetailsRoute(repoId = it) } ?: TopicPlaceholderRoute
         mutableStateOf(route)
     }
     var nestedNavKey by rememberSaveable(
@@ -97,17 +97,17 @@ internal fun ReposListDetailScreen(
         rememberNavController()
     }
 
-    fun onTopicClickShowDetailPane(topicId: Long) {
-        onRepoClick(topicId)
+    fun onRepoClickShowDetailPane(repoId: Long) {
+        onRepoClick(repoId)
         if (listDetailNavigator.isDetailPaneVisible()) {
             // If the detail pane was visible, then use the nestedNavController navigate call
             // directly
-            nestedNavController.navigateToRepoDetails(topicId) {
+            nestedNavController.navigateToRepoDetails(repoId) {
                 popUpTo<DetailPaneNavHostRoute>()
             }
         } else {
             // Otherwise, recreate the NavHost entirely, and start at the new destination
-            nestedNavHostStartRoute = RepoDetailsRoute(id = topicId)
+            nestedNavHostStartRoute = RepoDetailsRoute(repoId = repoId)
             nestedNavKey = UUID.randomUUID()
         }
         listDetailNavigator.navigateTo(ListDetailPaneScaffoldRole.Detail)
@@ -119,7 +119,7 @@ internal fun ReposListDetailScreen(
         listPane = {
             AnimatedPane {
                 listContent(
-                    ::onTopicClickShowDetailPane,
+                    ::onRepoClickShowDetailPane,
                     listDetailNavigator.isDetailPaneVisible(),
                 )
             }

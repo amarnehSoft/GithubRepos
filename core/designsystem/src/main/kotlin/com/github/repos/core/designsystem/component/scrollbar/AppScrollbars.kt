@@ -81,34 +81,6 @@ fun ScrollableState.DraggableScrollbar(
 }
 
 /**
- * A simple [Scrollbar].
- * Its thumb disappears when the scrolling container is dormant.
- * @param modifier a [Modifier] for the [Scrollbar]
- * @param state the driving state for the [Scrollbar]
- * @param orientation the orientation of the scrollbar
- */
-@Composable
-fun ScrollableState.DecorativeScrollbar(
-    state: ScrollbarState,
-    orientation: Orientation,
-    modifier: Modifier = Modifier,
-) {
-    val interactionSource = remember { MutableInteractionSource() }
-    Scrollbar(
-        modifier = modifier,
-        orientation = orientation,
-        interactionSource = interactionSource,
-        state = state,
-        thumb = {
-            DecorativeScrollbarThumb(
-                interactionSource = interactionSource,
-                orientation = orientation,
-            )
-        },
-    )
-}
-
-/**
  * A scrollbar thumb that is intended to also be a touch target for fast scrolling.
  */
 @Composable
@@ -128,28 +100,6 @@ private fun ScrollableState.DraggableScrollbarThumb(
     )
 }
 
-/**
- * A decorative scrollbar thumb used solely for communicating a user's position in a list.
- */
-@Composable
-private fun ScrollableState.DecorativeScrollbarThumb(
-    interactionSource: InteractionSource,
-    orientation: Orientation,
-) {
-    Box(
-        modifier = Modifier
-            .run {
-                when (orientation) {
-                    Vertical -> width(2.dp).fillMaxHeight()
-                    Horizontal -> height(2.dp).fillMaxWidth()
-                }
-            }
-            .scrollThumb(this, interactionSource),
-    )
-}
-
-// TODO: This lint is removed in 1.6 as the recommendation has changed
-// remove when project is upgraded
 @SuppressLint("ComposableModifierFactory")
 @Composable
 private fun Modifier.scrollThumb(

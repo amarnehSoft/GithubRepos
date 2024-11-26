@@ -24,7 +24,12 @@ class RepoDetailsViewModel @Inject constructor(
     private val toggleFavouriteUseCase: ToggleFavouriteOrAddCachedRepositoryUseCase,
 ) : ViewModel() {
 
-    private val repoId = savedStateHandle.toRoute<RepoDetailsRoute>().id
+    private val repoId = savedStateHandle.toRoute<RepoDetailsRoute>().repoId
+
+    /**
+     * Save the last successful repository to show it in case
+     * the repository is removed from database while the user is in the screen.
+     */
     private var lastSuccessRepository: Repository? = null
 
     val uiState: StateFlow<RepoDetailsUiState> = getRepoById(repoId)
@@ -45,6 +50,11 @@ class RepoDetailsViewModel @Inject constructor(
 
     fun toggleFavourite() {
         viewModelScope.launch {
+            /**
+             * Pass the last successful repository to the use case
+             * to be able to add it to the database again
+             * in case the user clicks on add to favourite button.
+             */
             lastSuccessRepository?.let {
                 toggleFavouriteUseCase(it)
             }

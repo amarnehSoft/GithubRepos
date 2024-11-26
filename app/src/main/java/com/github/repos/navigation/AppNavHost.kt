@@ -3,7 +3,7 @@ package com.github.repos.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
-import com.github.repos.feature.favourites.repos2pane.navigation.favouriteReposListDetailScreen
+import com.github.repos.feature.favourites.repos2pane.navigation.favouriteListDetailScreen
 import com.github.repos.feature.repos.navigation.ReposRoute
 import com.github.repos.feature.repos.repos2pane.navigation.reposListDetailScreen
 import com.github.repos.ui.AppState
@@ -27,6 +27,6 @@ fun AppNavHost(
         modifier = modifier,
     ) {
         reposListDetailScreen()
-        favouriteReposListDetailScreen()
+        favouriteListDetailScreen()
     }
 }

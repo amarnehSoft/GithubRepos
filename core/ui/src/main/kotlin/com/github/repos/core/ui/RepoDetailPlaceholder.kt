@@ -18,8 +18,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.github.repos.core.designsystem.icon.NiaIcons
-import com.github.repos.core.designsystem.theme.NiaTheme
+import com.github.repos.core.designsystem.icon.GithubIcons
+import com.github.repos.core.designsystem.theme.GithubTheme
 
 @Composable
 fun RepoDetailPlaceholder(
@@ -49,7 +49,7 @@ fun PlaceholderContent(
         verticalArrangement = Arrangement.Center,
     ) {
         Icon(
-            painter = painterResource(id = NiaIcons.RepoDrawable),
+            painter = painterResource(id = GithubIcons.RepoDrawable),
             contentDescription = null,
             tint = MaterialTheme.colorScheme.primary,
         )
@@ -66,7 +66,7 @@ fun PlaceholderContent(
 @Preview(widthDp = 200, heightDp = 300)
 @Composable
 fun TopicDetailPlaceholderPreview() {
-    NiaTheme {
+    GithubTheme {
         RepoDetailPlaceholder()
     }
 }

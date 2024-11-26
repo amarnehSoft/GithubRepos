@@ -5,7 +5,7 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
 /**
- * A class to model background color and tonal elevation values for Now in Android.
+ * A class to model background color and tonal elevation values for GithubRepos.
  */
 @Immutable
 data class TintTheme(

@@ -95,12 +95,12 @@ class AppState(
         when (topLevelDestination) {
             TopLevelDestination.REPOS -> navController.navigateToRepos(
                 initialRepoId = null,
-                topLevelNavOptions
+                navOptions = topLevelNavOptions,
             )
 
             TopLevelDestination.FAVOURITES -> navController.navigateToFavourites(
                 initialRepoId = null,
-                topLevelNavOptions
+                navOptions = topLevelNavOptions,
             )
         }
     }

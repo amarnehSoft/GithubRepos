@@ -2,7 +2,7 @@ package com.github.repos.navigation
 
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.github.repos.core.designsystem.icon.NiaIcons
+import com.github.repos.core.designsystem.icon.GithubIcons
 import kotlin.reflect.KClass
 import com.github.repos.R
 import com.github.repos.feature.favourites.navigation.FavouritesRoute
@@ -33,15 +33,15 @@ enum class TopLevelDestination(
     val baseRoute: KClass<*> = route,
 ) {
     REPOS(
-        selectedIcon = NiaIcons.Upcoming,
-        unselectedIcon = NiaIcons.UpcomingBorder,
+        selectedIcon = GithubIcons.Upcoming,
+        unselectedIcon = GithubIcons.UpcomingBorder,
         iconTextId = ReposR.string.feature_repos_title,
         titleTextId = R.string.app_name,
         route = ReposRoute::class,
     ),
     FAVOURITES(
-        selectedIcon = NiaIcons.Bookmarks,
-        unselectedIcon = NiaIcons.BookmarksBorder,
+        selectedIcon = GithubIcons.Bookmarks,
+        unselectedIcon = GithubIcons.BookmarksBorder,
         iconTextId = FavouritesR.string.feature_favourites_title,
         titleTextId = FavouritesR.string.feature_favourites_title,
         route = FavouritesRoute::class,

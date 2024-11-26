@@ -17,9 +17,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.github.repos.core.designsystem.component.NiaButton
-import com.github.repos.core.designsystem.icon.NiaIcons
-import com.github.repos.core.designsystem.theme.NiaTheme
+import com.github.repos.core.designsystem.component.GithubButton
+import com.github.repos.core.designsystem.icon.GithubIcons
+import com.github.repos.core.designsystem.theme.GithubTheme
 import com.github.repos.core.ui.R
 
 @Composable
@@ -34,7 +34,7 @@ fun ErrorScreen(
         verticalArrangement = Arrangement.Center
     ) {
         Image(
-            painter = painterResource(id = NiaIcons.ErrorDrawable),
+            painter = painterResource(id = GithubIcons.ErrorDrawable),
             contentDescription = null,
             modifier = Modifier
                 .padding(10.dp)
@@ -48,7 +48,7 @@ fun ErrorScreen(
         )
 
         onRetry?.let {
-            NiaButton(
+            GithubButton(
                 content = {
                     Text(
                         text = stringResource(R.string.core_ui_retry)
@@ -76,7 +76,7 @@ fun ErrorRow(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                imageVector = NiaIcons.Error,
+                imageVector = GithubIcons.Error,
                 contentDescription = null
             )
 
@@ -87,7 +87,7 @@ fun ErrorRow(
             )
         }
 
-        NiaButton(
+        GithubButton(
             content = {
                 Text(
                     text = stringResource(R.string.core_ui_retry)
@@ -101,7 +101,7 @@ fun ErrorRow(
 @Preview(showBackground = true)
 @Composable
 private fun ErrorScreenPreview() {
-    NiaTheme() {
+    GithubTheme() {
         ErrorScreen(onRetry = {})
     }
 }
@@ -109,7 +109,7 @@ private fun ErrorScreenPreview() {
 @Preview
 @Composable
 private fun ErrorRowPreview() {
-    NiaTheme {
+    GithubTheme {
         ErrorRow(onRetry = {})
     }
 }

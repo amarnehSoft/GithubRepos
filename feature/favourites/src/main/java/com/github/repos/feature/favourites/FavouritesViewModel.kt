@@ -57,7 +57,7 @@ class FavouritesViewModel @Inject constructor(
         _searchQuery.value = query
     }
 
-    fun addToFavourites(repoId: Long) {
+    fun removeFavourite(repoId: Long) {
         viewModelScope.launch {
             removeFavouriteUseCase(repoId)
         }

@@ -35,10 +35,10 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import com.github.repos.R
-import com.github.repos.core.designsystem.component.NiaBackground
-import com.github.repos.core.designsystem.component.NiaGradientBackground
-import com.github.repos.core.designsystem.component.NiaNavigationSuiteScaffold
-import com.github.repos.core.designsystem.component.NiaTopAppBar
+import com.github.repos.core.designsystem.component.GithubBackground
+import com.github.repos.core.designsystem.component.GithubGradientBackground
+import com.github.repos.core.designsystem.component.GithubNavigationSuiteScaffold
+import com.github.repos.core.designsystem.component.GithubTopAppBar
 import com.github.repos.core.designsystem.theme.GradientColors
 import com.github.repos.core.designsystem.theme.LocalGradientColors
 import com.github.repos.navigation.AppNavHost
@@ -55,8 +55,8 @@ fun GithubReposApp(
     val shouldShowGradientBackground =
         appState.currentTopLevelDestination == TopLevelDestination.REPOS
 
-    NiaBackground(modifier = modifier) {
-        NiaGradientBackground(
+    GithubBackground(modifier = modifier) {
+        GithubGradientBackground(
             gradientColors = if (shouldShowGradientBackground) {
                 LocalGradientColors.current
             } else {
@@ -101,7 +101,7 @@ internal fun GithubReposApp(
 ) {
     val currentDestination = appState.currentDestination
 
-    NiaNavigationSuiteScaffold(
+    GithubNavigationSuiteScaffold(
         navigationSuiteItems = {
             appState.topLevelDestinations.forEach { destination ->
                 val selected = currentDestination.isRouteInHierarchy(destination.baseRoute)
@@ -147,7 +147,7 @@ internal fun GithubReposApp(
                 // Show the top app bar on top level destinations.
                 val destination = appState.currentTopLevelDestination
 
-                NiaTopAppBar(
+                GithubTopAppBar(
                     titleRes = destination?.titleTextId ?: R.string.app_name,
                     colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                         containerColor = Color.Transparent,

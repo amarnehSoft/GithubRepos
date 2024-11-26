@@ -34,7 +34,7 @@ fun DynamicAsyncImage(
     contentDescription: String?,
     modifier: Modifier = Modifier,
     imageLoader: ImageLoader = ImageLoader(LocalContext.current),
-    // placeholder: Painter = painterResource(R.drawable.core_designsystem_ic_placeholder_default),
+//    placeholder: Painter = painterResource(R.drawable.core_designsystem_ic_placeholder_default),
 ) {
     val iconTint = LocalTintTheme.current.iconTint
     var isLoading by remember { mutableStateOf(true) }
@@ -57,13 +57,13 @@ fun DynamicAsyncImage(
             CircularProgressIndicator(
                 modifier = Modifier
                     .align(Alignment.Center)
-                    .size(80.dp),
+                    .size(60.dp),
                 color = MaterialTheme.colorScheme.tertiary,
             )
         }
         Image(
             contentScale = ContentScale.Crop,
-            painter = if (isError.not() && !isLocalInspection) imageLoader else imageLoader, // placeholder,
+            painter = imageLoader, // if (isError.not() && !isLocalInspection) imageLoader else placeholder,
             contentDescription = contentDescription,
             colorFilter = if (iconTint != Unspecified) ColorFilter.tint(iconTint) else null,
         )

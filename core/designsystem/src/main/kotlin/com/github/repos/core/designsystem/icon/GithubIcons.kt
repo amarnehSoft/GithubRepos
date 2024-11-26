@@ -2,8 +2,8 @@ package com.github.repos.core.designsystem.icon
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
-import androidx.compose.material.icons.automirrored.rounded.ShortText
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.Bookmarks
 import androidx.compose.material.icons.outlined.Upcoming
 import androidx.compose.material.icons.rounded.Add
@@ -12,23 +12,24 @@ import androidx.compose.material.icons.rounded.BookmarkBorder
 import androidx.compose.material.icons.rounded.Bookmarks
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Close
-import androidx.compose.material.icons.rounded.Error
+import androidx.compose.material.icons.rounded.Code
 import androidx.compose.material.icons.rounded.ErrorOutline
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.FavoriteBorder
+import androidx.compose.material.icons.rounded.FilterList
+import androidx.compose.material.icons.rounded.ForkRight
 import androidx.compose.material.icons.rounded.Grid3x3
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.Search
-import androidx.compose.material.icons.rounded.Settings
+import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material.icons.rounded.Upcoming
-import androidx.compose.material.icons.rounded.ViewDay
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.github.repos.core.designsystem.R
 
 /**
- * Now in Android icons. Material icons are [ImageVector]s, custom icons are drawable resource IDs.
+ * Github icons. Material icons are [ImageVector]s, custom icons are drawable resource IDs.
  */
-object NiaIcons {
+object GithubIcons {
     val Add = Icons.Rounded.Add
     val ArrowBack = Icons.AutoMirrored.Rounded.ArrowBack
     val Bookmark = Icons.Rounded.Bookmark
@@ -41,11 +42,8 @@ object NiaIcons {
     val MoreVert = Icons.Default.MoreVert
     val Person = Icons.Rounded.Person
     val Search = Icons.Rounded.Search
-    val Settings = Icons.Rounded.Settings
-    val ShortText = Icons.AutoMirrored.Rounded.ShortText
     val Upcoming = Icons.Rounded.Upcoming
     val UpcomingBorder = Icons.Outlined.Upcoming
-    val ViewDay = Icons.Rounded.ViewDay
 
     val Error = Icons.Rounded.ErrorOutline
     val ErrorDrawable = R.drawable.ic_empty_error
@@ -53,4 +51,8 @@ object NiaIcons {
 
     val Favorite = Icons.Rounded.Favorite
     val FavoriteBorder = Icons.Rounded.FavoriteBorder
+    val Star = Icons.Rounded.Star
+    val Fork = Icons.Rounded.ForkRight
+    val Code = Icons.Rounded.Code
+    val FilterList = Icons.Rounded.FilterList
 }

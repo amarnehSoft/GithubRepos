@@ -1,3 +1,8 @@
 <resources>
-
+    <string name="feature_details_stars">Stars</string>
+    <string name="feature_details_forks">Forks</string>
+    <string name="feature_details_language">Language</string>
+    <string name="feature_details_open_in_browser">Open in Browser</string>
+    <string name="feature_details_added_to_favourites">Added to Favourites</string>
+    <string name="feature_details_add_to_favourites">Add to Favourites</string>
 </resources>

@@ -10,8 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
@@ -31,10 +29,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.github.repos.core.designsystem.component.DynamicAsyncImage
-import com.github.repos.core.designsystem.component.NiaIconToggleButton
-import com.github.repos.core.designsystem.icon.NiaIcons
-import com.github.repos.core.designsystem.theme.NiaTheme
-import com.github.repos.core.ui.CachedDynamicAsyncImage
+import com.github.repos.core.designsystem.component.GithubIconToggleButton
+import com.github.repos.core.designsystem.icon.GithubIcons
+import com.github.repos.core.designsystem.theme.GithubTheme
 
 @Composable
 fun RepositoryItem(
@@ -54,7 +51,7 @@ fun RepositoryItem(
         leadingContent = {
             OwnerAvatar(
                 imageUrl = ownerAvatarUrl,
-                iconModifier
+                modifier = iconModifier
                     .size(48.dp)
                     .clip(CircleShape)
             )
@@ -75,8 +72,8 @@ fun RepositoryItem(
                 Spacer(modifier = Modifier.height(4.dp))
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
-                        imageVector = Icons.Default.Star,
-                        contentDescription = "Stars",
+                        imageVector = GithubIcons.Star,
+                        contentDescription = "",
                         tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(16.dp)
                     )
@@ -90,18 +87,18 @@ fun RepositoryItem(
             }
         },
         trailingContent = {
-            NiaIconToggleButton(
+            GithubIconToggleButton(
                 checked = isFavourite,
                 onCheckedChange = onFavouriteToggleClick,
                 icon = {
                     Icon(
-                        imageVector = NiaIcons.FavoriteBorder,
+                        imageVector = GithubIcons.FavoriteBorder,
                         contentDescription = "",
                     )
                 },
                 checkedIcon = {
                     Icon(
-                        imageVector = NiaIcons.Favorite,
+                        imageVector = GithubIcons.Favorite,
                         contentDescription = "",
                     )
                 },
@@ -129,8 +126,7 @@ private fun OwnerAvatar(imageUrl: String, modifier: Modifier = Modifier) {
             modifier = modifier
                 .background(MaterialTheme.colorScheme.surface)
                 .padding(4.dp),
-            imageVector = NiaIcons.Person,
-            // decorative image
+            imageVector = GithubIcons.Person,
             contentDescription = null,
         )
     } else {
@@ -139,63 +135,6 @@ private fun OwnerAvatar(imageUrl: String, modifier: Modifier = Modifier) {
             contentDescription = null,
             modifier = modifier,
         )
-    }
-}
-
-@Preview
-@Composable
-private fun RepositoryCardPreview() {
-    NiaTheme {
-        Surface {
-            RepositoryItem(
-                name = "Compose",
-                description = "Description",
-                onClick = { },
-                ownerUserName = "Mohammad Amarneh",
-                ownerAvatarUrl = "",
-                starsCount = 3,
-                isFavourite = true,
-                onFavouriteToggleClick = {},
-            )
-        }
-    }
-}
-
-@Preview
-@Composable
-private fun RepositoryCardLongNamePreview() {
-    NiaTheme {
-        Surface {
-            RepositoryItem(
-                name = "A very very very very very very very very long name",
-                description = "Description",
-                onClick = { },
-                ownerUserName = "Mohammad Amarneh",
-                ownerAvatarUrl = "",
-                starsCount = 3,
-                isFavourite = true,
-                onFavouriteToggleClick = {},
-            )
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun RepositoryCardLongDescriptionPreview() {
-    NiaTheme {
-        Surface {
-            RepositoryItem(
-                name = "A very very very very very very very very long name",
-                description = "A very very very very very very very very long Description",
-                onClick = { },
-                ownerUserName = "Mohammad Amarneh",
-                ownerAvatarUrl = "",
-                starsCount = 3,
-                isFavourite = true,
-                onFavouriteToggleClick = {},
-            )
-        }
     }
 }
 
@@ -216,5 +155,24 @@ private fun DescriptionText(
             style = MaterialTheme.typography.bodyMedium.copy(fontStyle = FontStyle.Italic),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
+    }
+}
+
+@Preview
+@Composable
+private fun RepositoryCardPreview() {
+    GithubTheme {
+        Surface {
+            RepositoryItem(
+                name = "Compose",
+                description = "Description",
+                onClick = { },
+                ownerUserName = "Mohammad Amarneh",
+                ownerAvatarUrl = "",
+                starsCount = 3,
+                isFavourite = true,
+                onFavouriteToggleClick = {},
+            )
+        }
     }
 }

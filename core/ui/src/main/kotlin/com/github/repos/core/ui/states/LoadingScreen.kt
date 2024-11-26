@@ -6,8 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.github.repos.core.designsystem.component.NiaLoadingWheel
-import com.github.repos.core.designsystem.theme.NiaTheme
+import com.github.repos.core.designsystem.component.GithubLoadingWheel
+import com.github.repos.core.designsystem.theme.GithubTheme
 
 @Composable
 fun LoadingScreen(
@@ -17,14 +17,14 @@ fun LoadingScreen(
         modifier = modifier
             .fillMaxSize()
     ) {
-        NiaLoadingWheel(modifier = Modifier.align(Alignment.Center))
+        GithubLoadingWheel(modifier = Modifier.align(Alignment.Center))
     }
 }
 
 @Preview
 @Composable
 private fun PreviewLoadingScreen() {
-    NiaTheme {
+    GithubTheme {
         LoadingScreen()
     }
 }

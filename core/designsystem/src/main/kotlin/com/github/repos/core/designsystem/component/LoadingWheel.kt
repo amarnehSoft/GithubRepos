@@ -14,7 +14,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -29,11 +28,11 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import com.github.repos.core.designsystem.theme.NiaTheme
+import com.github.repos.core.designsystem.theme.GithubTheme
 import kotlinx.coroutines.launch
 
 @Composable
-fun NiaLoadingWheel(
+fun GithubLoadingWheel(
     modifier: Modifier = Modifier,
 ) {
     val infiniteTransition = rememberInfiniteTransition(label = "wheel transition")
@@ -111,38 +110,12 @@ fun NiaLoadingWheel(
     }
 }
 
-@Composable
-fun NiaOverlayLoadingWheel(
-    contentDesc: String,
-    modifier: Modifier = Modifier,
-) {
-    Surface(
-        shape = RoundedCornerShape(60.dp),
-        shadowElevation = 8.dp,
-        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.83f),
-        modifier = modifier
-            .size(60.dp),
-    ) {
-        NiaLoadingWheel()
-    }
-}
-
 @ThemePreviews
 @Composable
 fun NiaLoadingWheelPreview() {
-    NiaTheme {
+    GithubTheme {
         Surface {
-            NiaLoadingWheel()
-        }
-    }
-}
-
-@ThemePreviews
-@Composable
-fun NiaOverlayLoadingWheelPreview() {
-    NiaTheme {
-        Surface {
-            NiaOverlayLoadingWheel(contentDesc = "LoadingWheel")
+            GithubLoadingWheel()
         }
     }
 }

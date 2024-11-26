@@ -25,11 +25,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.github.repos.core.designsystem.icon.NiaIcons
-import com.github.repos.core.designsystem.theme.NiaTheme
+import com.github.repos.core.designsystem.icon.GithubIcons
+import com.github.repos.core.designsystem.theme.GithubTheme
 
 /**
- * Now in Android navigation bar item with icon and label content slots. Wraps Material 3
+ * Github navigation bar item with icon and label content slots. Wraps Material 3
  * [NavigationBarItem].
  *
  * @param selected Whether this item is selected.
@@ -44,7 +44,7 @@ import com.github.repos.core.designsystem.theme.NiaTheme
  * only be shown when this item is selected.
  */
 @Composable
-fun RowScope.NiaNavigationBarItem(
+fun RowScope.GithubNavigationBarItem(
     selected: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -63,37 +63,37 @@ fun RowScope.NiaNavigationBarItem(
         label = label,
         alwaysShowLabel = alwaysShowLabel,
         colors = NavigationBarItemDefaults.colors(
-            selectedIconColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedIconColor = NiaNavigationDefaults.navigationContentColor(),
-            selectedTextColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedTextColor = NiaNavigationDefaults.navigationContentColor(),
-            indicatorColor = NiaNavigationDefaults.navigationIndicatorColor(),
+            selectedIconColor = GithubNavigationDefaults.navigationSelectedItemColor(),
+            unselectedIconColor = GithubNavigationDefaults.navigationContentColor(),
+            selectedTextColor = GithubNavigationDefaults.navigationSelectedItemColor(),
+            unselectedTextColor = GithubNavigationDefaults.navigationContentColor(),
+            indicatorColor = GithubNavigationDefaults.navigationIndicatorColor(),
         ),
     )
 }
 
 /**
- * Now in Android navigation bar with content slot. Wraps Material 3 [NavigationBar].
+ * Github navigation bar with content slot. Wraps Material 3 [NavigationBar].
  *
  * @param modifier Modifier to be applied to the navigation bar.
  * @param content Destinations inside the navigation bar. This should contain multiple
  * [NavigationBarItem]s.
  */
 @Composable
-fun NiaNavigationBar(
+fun GithubNavigationBar(
     modifier: Modifier = Modifier,
     content: @Composable RowScope.() -> Unit,
 ) {
     NavigationBar(
         modifier = modifier,
-        contentColor = NiaNavigationDefaults.navigationContentColor(),
+        contentColor = GithubNavigationDefaults.navigationContentColor(),
         tonalElevation = 0.dp,
         content = content,
     )
 }
 
 /**
- * Now in Android navigation rail item with icon and label content slots. Wraps Material 3
+ * Github navigation rail item with icon and label content slots. Wraps Material 3
  * [NavigationRailItem].
  *
  * @param selected Whether this item is selected.
@@ -108,7 +108,7 @@ fun NiaNavigationBar(
  * only be shown when this item is selected.
  */
 @Composable
-fun NiaNavigationRailItem(
+fun GithubNavigationRailItem(
     selected: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -127,17 +127,17 @@ fun NiaNavigationRailItem(
         label = label,
         alwaysShowLabel = alwaysShowLabel,
         colors = NavigationRailItemDefaults.colors(
-            selectedIconColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedIconColor = NiaNavigationDefaults.navigationContentColor(),
-            selectedTextColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedTextColor = NiaNavigationDefaults.navigationContentColor(),
-            indicatorColor = NiaNavigationDefaults.navigationIndicatorColor(),
+            selectedIconColor = GithubNavigationDefaults.navigationSelectedItemColor(),
+            unselectedIconColor = GithubNavigationDefaults.navigationContentColor(),
+            selectedTextColor = GithubNavigationDefaults.navigationSelectedItemColor(),
+            unselectedTextColor = GithubNavigationDefaults.navigationContentColor(),
+            indicatorColor = GithubNavigationDefaults.navigationIndicatorColor(),
         ),
     )
 }
 
 /**
- * Now in Android navigation rail with header and content slots. Wraps Material 3 [NavigationRail].
+ * Github navigation rail with header and content slots. Wraps Material 3 [NavigationRail].
  *
  * @param modifier Modifier to be applied to the navigation rail.
  * @param header Optional header that may hold a floating action button or a logo.
@@ -145,7 +145,7 @@ fun NiaNavigationRailItem(
  * [NavigationRailItem]s.
  */
 @Composable
-fun NiaNavigationRail(
+fun GithubNavigationRail(
     modifier: Modifier = Modifier,
     header: @Composable (ColumnScope.() -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit,
@@ -153,18 +153,18 @@ fun NiaNavigationRail(
     NavigationRail(
         modifier = modifier,
         containerColor = Color.Transparent,
-        contentColor = NiaNavigationDefaults.navigationContentColor(),
+        contentColor = GithubNavigationDefaults.navigationContentColor(),
         header = header,
         content = content,
     )
 }
 
 /**
- * Now in Android navigation suite scaffold with item and content slots.
+ * Github navigation suite scaffold with item and content slots.
  * Wraps Material 3 [NavigationSuiteScaffold].
  *
  * @param modifier Modifier to be applied to the navigation suite scaffold.
- * @param navigationSuiteItems A slot to display multiple items via [NiaNavigationSuiteScope].
+ * @param navigationSuiteItems A slot to display multiple items via [GithubNavigationSuiteScope].
  * @param windowAdaptiveInfo The window adaptive info.
  * @param content The app content inside the scaffold.
  */
@@ -173,8 +173,8 @@ fun NiaNavigationRail(
     ExperimentalMaterial3AdaptiveApi::class,
 )
 @Composable
-fun NiaNavigationSuiteScaffold(
-    navigationSuiteItems: NiaNavigationSuiteScope.() -> Unit,
+fun GithubNavigationSuiteScaffold(
+    navigationSuiteItems: GithubNavigationSuiteScope.() -> Unit,
     modifier: Modifier = Modifier,
     windowAdaptiveInfo: WindowAdaptiveInfo = currentWindowAdaptiveInfo(),
     content: @Composable () -> Unit,
@@ -183,30 +183,30 @@ fun NiaNavigationSuiteScaffold(
         .calculateFromAdaptiveInfo(windowAdaptiveInfo)
     val navigationSuiteItemColors = NavigationSuiteItemColors(
         navigationBarItemColors = NavigationBarItemDefaults.colors(
-            selectedIconColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedIconColor = NiaNavigationDefaults.navigationContentColor(),
-            selectedTextColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedTextColor = NiaNavigationDefaults.navigationContentColor(),
-            indicatorColor = NiaNavigationDefaults.navigationIndicatorColor(),
+            selectedIconColor = GithubNavigationDefaults.navigationSelectedItemColor(),
+            unselectedIconColor = GithubNavigationDefaults.navigationContentColor(),
+            selectedTextColor = GithubNavigationDefaults.navigationSelectedItemColor(),
+            unselectedTextColor = GithubNavigationDefaults.navigationContentColor(),
+            indicatorColor = GithubNavigationDefaults.navigationIndicatorColor(),
         ),
         navigationRailItemColors = NavigationRailItemDefaults.colors(
-            selectedIconColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedIconColor = NiaNavigationDefaults.navigationContentColor(),
-            selectedTextColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedTextColor = NiaNavigationDefaults.navigationContentColor(),
-            indicatorColor = NiaNavigationDefaults.navigationIndicatorColor(),
+            selectedIconColor = GithubNavigationDefaults.navigationSelectedItemColor(),
+            unselectedIconColor = GithubNavigationDefaults.navigationContentColor(),
+            selectedTextColor = GithubNavigationDefaults.navigationSelectedItemColor(),
+            unselectedTextColor = GithubNavigationDefaults.navigationContentColor(),
+            indicatorColor = GithubNavigationDefaults.navigationIndicatorColor(),
         ),
         navigationDrawerItemColors = NavigationDrawerItemDefaults.colors(
-            selectedIconColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedIconColor = NiaNavigationDefaults.navigationContentColor(),
-            selectedTextColor = NiaNavigationDefaults.navigationSelectedItemColor(),
-            unselectedTextColor = NiaNavigationDefaults.navigationContentColor(),
+            selectedIconColor = GithubNavigationDefaults.navigationSelectedItemColor(),
+            unselectedIconColor = GithubNavigationDefaults.navigationContentColor(),
+            selectedTextColor = GithubNavigationDefaults.navigationSelectedItemColor(),
+            unselectedTextColor = GithubNavigationDefaults.navigationContentColor(),
         ),
     )
 
     NavigationSuiteScaffold(
         navigationSuiteItems = {
-            NiaNavigationSuiteScope(
+            GithubNavigationSuiteScope(
                 navigationSuiteScope = this,
                 navigationSuiteItemColors = navigationSuiteItemColors,
             ).run(navigationSuiteItems)
@@ -214,7 +214,7 @@ fun NiaNavigationSuiteScaffold(
         layoutType = layoutType,
         containerColor = Color.Transparent,
         navigationSuiteColors = NavigationSuiteDefaults.colors(
-            navigationBarContentColor = NiaNavigationDefaults.navigationContentColor(),
+            navigationBarContentColor = GithubNavigationDefaults.navigationContentColor(),
             navigationRailContainerColor = Color.Transparent,
         ),
         modifier = modifier,
@@ -227,7 +227,7 @@ fun NiaNavigationSuiteScaffold(
  * A wrapper around [NavigationSuiteScope] to declare navigation items.
  */
 @OptIn(ExperimentalMaterial3AdaptiveNavigationSuiteApi::class)
-class NiaNavigationSuiteScope internal constructor(
+class GithubNavigationSuiteScope internal constructor(
     private val navigationSuiteScope: NavigationSuiteScope,
     private val navigationSuiteItemColors: NavigationSuiteItemColors,
 ) {
@@ -256,23 +256,23 @@ class NiaNavigationSuiteScope internal constructor(
 
 @ThemePreviews
 @Composable
-fun NiaNavigationBarPreview() {
+fun NavigationBarPreview() {
     val items = listOf("For you", "Saved", "Interests")
     val icons = listOf(
-        NiaIcons.UpcomingBorder,
-        NiaIcons.BookmarksBorder,
-        NiaIcons.Grid3x3,
+        GithubIcons.UpcomingBorder,
+        GithubIcons.BookmarksBorder,
+        GithubIcons.Grid3x3,
     )
     val selectedIcons = listOf(
-        NiaIcons.Upcoming,
-        NiaIcons.Bookmarks,
-        NiaIcons.Grid3x3,
+        GithubIcons.Upcoming,
+        GithubIcons.Bookmarks,
+        GithubIcons.Grid3x3,
     )
 
-    NiaTheme {
-        NiaNavigationBar {
+    GithubTheme {
+        GithubNavigationBar {
             items.forEachIndexed { index, item ->
-                NiaNavigationBarItem(
+                GithubNavigationBarItem(
                     icon = {
                         Icon(
                             imageVector = icons[index],
@@ -296,23 +296,23 @@ fun NiaNavigationBarPreview() {
 
 @ThemePreviews
 @Composable
-fun NiaNavigationRailPreview() {
+fun NavigationRailPreview() {
     val items = listOf("For you", "Saved", "Interests")
     val icons = listOf(
-        NiaIcons.UpcomingBorder,
-        NiaIcons.BookmarksBorder,
-        NiaIcons.Grid3x3,
+        GithubIcons.UpcomingBorder,
+        GithubIcons.BookmarksBorder,
+        GithubIcons.Grid3x3,
     )
     val selectedIcons = listOf(
-        NiaIcons.Upcoming,
-        NiaIcons.Bookmarks,
-        NiaIcons.Grid3x3,
+        GithubIcons.Upcoming,
+        GithubIcons.Bookmarks,
+        GithubIcons.Grid3x3,
     )
 
-    NiaTheme {
-        NiaNavigationRail {
+    GithubTheme {
+        GithubNavigationRail {
             items.forEachIndexed { index, item ->
-                NiaNavigationRailItem(
+                GithubNavigationRailItem(
                     icon = {
                         Icon(
                             imageVector = icons[index],
@@ -335,9 +335,9 @@ fun NiaNavigationRailPreview() {
 }
 
 /**
- * Now in Android navigation default values.
+ * Github navigation default values.
  */
-object NiaNavigationDefaults {
+object GithubNavigationDefaults {
     @Composable
     fun navigationContentColor() = MaterialTheme.colorScheme.onSurfaceVariant
 

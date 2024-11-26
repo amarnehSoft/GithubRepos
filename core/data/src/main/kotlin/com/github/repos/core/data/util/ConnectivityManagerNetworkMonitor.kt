@@ -9,8 +9,8 @@ import android.net.NetworkRequest.Builder
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import androidx.core.content.getSystemService
-import com.github.repos.core.network.Dispatcher
-import com.github.repos.core.network.GithubDispatchers
+import com.github.repos.core.Dispatcher
+import com.github.repos.core.GithubDispatchers
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.channels.awaitClose

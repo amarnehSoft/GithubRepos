@@ -9,4 +9,6 @@
     <string name="feature_repos_last_day">Last\nDay</string>
     <string name="feature_repos_last_week">Last\nWeek</string>
     <string name="feature_repos_last_month">Last\nMonth</string>
+
+    <string name="feature_repos_search_placeholder">Search</string>
 </resources>

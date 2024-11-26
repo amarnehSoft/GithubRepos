@@ -5,7 +5,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.scaleIn
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
@@ -32,12 +31,14 @@ import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.github.repos.core.designsystem.component.NiaLoadingWheel
-import com.github.repos.core.designsystem.icon.NiaIcons
-import com.github.repos.core.designsystem.theme.NiaTheme
+import com.github.repos.core.designsystem.component.GithubLoadingWheel
+import com.github.repos.core.designsystem.icon.GithubIcons
+import com.github.repos.core.designsystem.theme.GithubTheme
+import com.github.repos.feature.repos.R
 
 @Composable
 internal fun SearchToolbar(
@@ -100,12 +101,12 @@ private fun RowScope.SearchTextField(
                 label = "",
             ) {
                 if (it) {
-                    NiaLoadingWheel(
+                    GithubLoadingWheel(
                         modifier = Modifier.size(40.dp),
                     )
                 } else {
                     Icon(
-                        imageVector = NiaIcons.Search,
+                        imageVector = GithubIcons.Search,
                         contentDescription = "",
                         tint = MaterialTheme.colorScheme.onSurface,
                     )
@@ -124,7 +125,7 @@ private fun RowScope.SearchTextField(
                     },
                 ) {
                     Icon(
-                        imageVector = NiaIcons.Close,
+                        imageVector = GithubIcons.Close,
                         contentDescription = "",
                         tint = MaterialTheme.colorScheme.onSurface,
                     )
@@ -150,7 +151,7 @@ private fun RowScope.SearchTextField(
         value = searchQuery,
         placeholder = {
             Text(
-                text = "Search",
+                text = stringResource(id = R.string.feature_repos_search_placeholder),
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
             )
         },
@@ -165,15 +166,12 @@ private fun RowScope.SearchTextField(
         maxLines = 1,
         singleLine = true,
     )
-//    LaunchedEffect(Unit) {
-//        focusRequester.requestFocus()
-//    }
 }
 
 @Preview
 @Composable
 private fun SearchToolbarPreview() {
-    NiaTheme {
+    GithubTheme {
         SearchToolbar(
             searchQuery = "",
             onSearchQueryChanged = {},

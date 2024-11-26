@@ -5,7 +5,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Upsert
 import com.github.repos.core.database.model.RepoEntity
 import kotlinx.coroutines.flow.Flow
 

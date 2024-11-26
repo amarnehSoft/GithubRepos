@@ -7,7 +7,7 @@ import androidx.navigation.compose.composable
 import com.github.repos.feature.details.RepoDetailsScreen
 import kotlinx.serialization.Serializable
 
-@Serializable data class RepoDetailsRoute(val id: Long)
+@Serializable data class RepoDetailsRoute(val repoId: Long)
 
 fun NavController.navigateToRepoDetails(repoId: Long, navOptions: NavOptionsBuilder.() -> Unit = {}) {
     navigate(route = RepoDetailsRoute(repoId)) {

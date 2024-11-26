@@ -12,7 +12,7 @@ import com.github.repos.core.database.model.asExternalModel
 import com.github.repos.core.model.data.Repository
 import com.github.repos.core.network.GithubReposNetworkDataSource
 import com.github.repos.core.network.NetworkReposCache
-import com.github.repos.core.network.di.ApplicationScope
+import com.github.repos.core.di.ApplicationScope
 import com.github.repos.core.network.model.asExternalModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -79,6 +79,9 @@ internal class ReposRepositoryImpl @Inject constructor(
             }
     }
 
+    /**
+     * Toggles the favorite status of a repository.
+     */
     override suspend fun toggleFavorite(repositoryId: Long): Boolean {
         val networkRepo = networkReposCache.findRepositoryById(repositoryId)
         networkRepo?.let {
@@ -92,6 +95,7 @@ internal class ReposRepositoryImpl @Inject constructor(
             return true
         }
 
+        // If the repository is not found in the network cache, it supposedly exist in the database
         val savedRepo = repoDao.getRepoById(repositoryId).firstOrNull()
         if (savedRepo != null) {
             repoDao.deleteRepo(repositoryId)

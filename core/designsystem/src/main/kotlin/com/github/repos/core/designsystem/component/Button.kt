@@ -13,15 +13,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.github.repos.core.designsystem.icon.NiaIcons
-import com.github.repos.core.designsystem.theme.NiaTheme
+import com.github.repos.core.designsystem.icon.GithubIcons
+import com.github.repos.core.designsystem.theme.GithubTheme
 
 /**
- * Now in Android filled button with generic content slot. Wraps Material 3 [Button].
+ * Github filled button with generic content slot. Wraps Material 3 [Button].
  *
  * @param onClick Will be called when the user clicks the button.
  * @param modifier Modifier to be applied to the button.
@@ -32,7 +31,7 @@ import com.github.repos.core.designsystem.theme.NiaTheme
  * @param content The button content.
  */
 @Composable
-fun NiaButton(
+fun GithubButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
@@ -52,7 +51,7 @@ fun NiaButton(
 }
 
 /**
- * Now in Android filled button with text and icon content slots.
+ * Github filled button with text and icon content slots.
  *
  * @param onClick Will be called when the user clicks the button.
  * @param modifier Modifier to be applied to the button.
@@ -62,14 +61,14 @@ fun NiaButton(
  * @param leadingIcon The button leading icon content. Pass `null` here for no leading icon.
  */
 @Composable
-fun NiaButton(
+fun GithubButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     text: @Composable () -> Unit,
     leadingIcon: @Composable (() -> Unit)? = null,
 ) {
-    NiaButton(
+    GithubButton(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
@@ -79,7 +78,7 @@ fun NiaButton(
             ButtonDefaults.ContentPadding
         },
     ) {
-        NiaButtonContent(
+        GithubButtonContent(
             text = text,
             leadingIcon = leadingIcon,
         )
@@ -87,7 +86,7 @@ fun NiaButton(
 }
 
 /**
- * Now in Android outlined button with generic content slot. Wraps Material 3 [OutlinedButton].
+ * Github outlined button with generic content slot. Wraps Material 3 [OutlinedButton].
  *
  * @param onClick Will be called when the user clicks the button.
  * @param modifier Modifier to be applied to the button.
@@ -98,7 +97,7 @@ fun NiaButton(
  * @param content The button content.
  */
 @Composable
-fun NiaOutlinedButton(
+fun GithubOutlinedButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
@@ -113,12 +112,12 @@ fun NiaOutlinedButton(
             contentColor = MaterialTheme.colorScheme.onBackground,
         ),
         border = BorderStroke(
-            width = NiaButtonDefaults.OutlinedButtonBorderWidth,
+            width = GithubButtonDefaults.OutlinedButtonBorderWidth,
             color = if (enabled) {
                 MaterialTheme.colorScheme.outline
             } else {
                 MaterialTheme.colorScheme.onSurface.copy(
-                    alpha = NiaButtonDefaults.DISABLED_OUTLINED_BUTTON_BORDER_ALPHA,
+                    alpha = GithubButtonDefaults.DISABLED_OUTLINED_BUTTON_BORDER_ALPHA,
                 )
             },
         ),
@@ -128,7 +127,7 @@ fun NiaOutlinedButton(
 }
 
 /**
- * Now in Android outlined button with text and icon content slots.
+ * Github outlined button with text and icon content slots.
  *
  * @param onClick Will be called when the user clicks the button.
  * @param modifier Modifier to be applied to the button.
@@ -138,14 +137,14 @@ fun NiaOutlinedButton(
  * @param leadingIcon The button leading icon content. Pass `null` here for no leading icon.
  */
 @Composable
-fun NiaOutlinedButton(
+fun GithubOutlinedButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     text: @Composable () -> Unit,
     leadingIcon: @Composable (() -> Unit)? = null,
 ) {
-    NiaOutlinedButton(
+    GithubOutlinedButton(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
@@ -155,64 +154,7 @@ fun NiaOutlinedButton(
             ButtonDefaults.ContentPadding
         },
     ) {
-        NiaButtonContent(
-            text = text,
-            leadingIcon = leadingIcon,
-        )
-    }
-}
-
-/**
- * Now in Android text button with generic content slot. Wraps Material 3 [TextButton].
- *
- * @param onClick Will be called when the user clicks the button.
- * @param modifier Modifier to be applied to the button.
- * @param enabled Controls the enabled state of the button. When `false`, this button will not be
- * clickable and will appear disabled to accessibility services.
- * @param content The button content.
- */
-@Composable
-fun NiaTextButton(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    content: @Composable RowScope.() -> Unit,
-) {
-    TextButton(
-        onClick = onClick,
-        modifier = modifier,
-        enabled = enabled,
-        colors = ButtonDefaults.textButtonColors(
-            contentColor = MaterialTheme.colorScheme.onBackground,
-        ),
-        content = content,
-    )
-}
-
-/**
- * Now in Android text button with text and icon content slots.
- *
- * @param onClick Will be called when the user clicks the button.
- * @param modifier Modifier to be applied to the button.
- * @param enabled Controls the enabled state of the button. When `false`, this button will not be
- * clickable and will appear disabled to accessibility services.
- * @param text The button text label content.
- * @param leadingIcon The button leading icon content. Pass `null` here for no leading icon.
- */
-@Composable
-fun NiaTextButton(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    text: @Composable () -> Unit,
-    leadingIcon: @Composable (() -> Unit)? = null,
-) {
-    NiaTextButton(
-        onClick = onClick,
-        modifier = modifier,
-        enabled = enabled,
-    ) {
-        NiaButtonContent(
+        GithubButtonContent(
             text = text,
             leadingIcon = leadingIcon,
         )
@@ -226,7 +168,7 @@ fun NiaTextButton(
  * @param leadingIcon The button leading icon content. Default is `null` for no leading icon.Ï
  */
 @Composable
-private fun NiaButtonContent(
+private fun GithubButtonContent(
     text: @Composable () -> Unit,
     leadingIcon: @Composable (() -> Unit)? = null,
 ) {
@@ -251,47 +193,42 @@ private fun NiaButtonContent(
 
 @ThemePreviews
 @Composable
-fun NiaButtonPreview() {
-    NiaTheme {
-        NiaBackground(modifier = Modifier.size(150.dp, 50.dp)) {
-            NiaButton(onClick = {}, text = { Text("Test button") })
+fun ButtonPreview() {
+    GithubTheme {
+        GithubBackground(modifier = Modifier.size(150.dp, 50.dp)) {
+            GithubButton(onClick = {}, text = { Text("Test button") })
         }
     }
 }
 
 @ThemePreviews
 @Composable
-fun NiaOutlinedButtonPreview() {
-    NiaTheme {
-        NiaBackground(modifier = Modifier.size(150.dp, 50.dp)) {
-            NiaOutlinedButton(onClick = {}, text = { Text("Test button") })
+fun OutlinedButtonPreview() {
+    GithubTheme {
+        GithubBackground(modifier = Modifier.size(150.dp, 50.dp)) {
+            GithubOutlinedButton(onClick = {}, text = { Text("Test button") })
         }
     }
 }
 
 @ThemePreviews
 @Composable
-fun NiaButtonLeadingIconPreview() {
-    NiaTheme {
-        NiaBackground(modifier = Modifier.size(150.dp, 50.dp)) {
-            NiaButton(
+fun ButtonLeadingIconPreview() {
+    GithubTheme {
+        GithubBackground(modifier = Modifier.size(150.dp, 50.dp)) {
+            GithubButton(
                 onClick = {},
                 text = { Text("Test button") },
-                leadingIcon = { Icon(imageVector = NiaIcons.Add, contentDescription = null) },
+                leadingIcon = { Icon(imageVector = GithubIcons.Add, contentDescription = null) },
             )
         }
     }
 }
 
 /**
- * Now in Android button default values.
+ * Github button default values.
  */
-object NiaButtonDefaults {
-    // TODO: File bug
-    // OutlinedButton border color doesn't respect disabled state by default
+object GithubButtonDefaults {
     const val DISABLED_OUTLINED_BUTTON_BORDER_ALPHA = 0.12f
-
-    // TODO: File bug
-    // OutlinedButton default border width isn't exposed via ButtonDefaults
     val OutlinedButtonBorderWidth = 1.dp
 }

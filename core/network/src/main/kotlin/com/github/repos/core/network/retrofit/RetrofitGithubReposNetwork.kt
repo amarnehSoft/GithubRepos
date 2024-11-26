@@ -57,7 +57,6 @@ internal class RetrofitGithubReposNetwork @Inject constructor(
         searchQuery: String,
         fromDate: LocalDate,
     ): SearchRepositoriesResponse {
-        // TODO: format date correctly
         val query = searchQuery + (if (searchQuery.isNotBlank()) " in:name in:description+" else "") + "created:>${fromDate}"
         val response = networkApi.searchRepositories(
             query = query,
@@ -81,9 +80,7 @@ internal class RetrofitGithubReposNetwork @Inject constructor(
             )
         } else {
             throw IllegalStateException(
-                "Failed to fetch repositories: ${
-                    response.errorBody()?.string()
-                }"
+                "Failed to fetch repositories: ${response.errorBody()?.string()}"
             )
         }
     }

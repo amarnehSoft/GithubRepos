@@ -11,7 +11,6 @@ class TokenInterceptor @Inject constructor() : Interceptor {
         val originalRequest: Request = chain.request()
         val token = "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"
 
-        // Add the Authorization header if the token is available
         val modifiedRequest = originalRequest.newBuilder()
             .addHeader("Authorization", "Bearer $token")
             .build()

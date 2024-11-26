@@ -1,7 +1,7 @@
-package com.github.repos.core.network.di
+package com.github.repos.core.di
 
-import com.github.repos.core.network.Dispatcher
-import com.github.repos.core.network.GithubDispatchers
+import com.github.repos.core.Dispatcher
+import com.github.repos.core.GithubDispatchers
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

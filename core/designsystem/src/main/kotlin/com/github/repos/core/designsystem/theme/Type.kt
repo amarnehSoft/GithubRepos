@@ -9,9 +9,9 @@ import androidx.compose.ui.text.style.LineHeightStyle.Trim
 import androidx.compose.ui.unit.sp
 
 /**
- * Now in Android typography.
+ * GithubRepos typography.
  */
-internal val NiaTypography = Typography(
+internal val GithubTypography = Typography(
     displayLarge = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = 57.sp,

@@ -7,7 +7,7 @@ import com.github.repos.feature.favourites.FavouritesRoute
 import com.github.repos.feature.repos.repos2pane.ReposListDetailScreen
 
 @Composable
-internal fun FavouriteReposListDetailScreen(
+internal fun FavouritesListDetailScreen(
     windowAdaptiveInfo: WindowAdaptiveInfo = currentWindowAdaptiveInfo(),
 ) {
     ReposListDetailScreen(

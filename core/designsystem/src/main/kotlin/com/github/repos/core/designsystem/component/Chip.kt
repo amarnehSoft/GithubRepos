@@ -12,11 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.github.repos.core.designsystem.icon.NiaIcons
-import com.github.repos.core.designsystem.theme.NiaTheme
+import com.github.repos.core.designsystem.icon.GithubIcons
+import com.github.repos.core.designsystem.theme.GithubTheme
 
 /**
- * Now in Android filter chip with included leading checked icon as well as text content slot.
+ * Github filter chip with included leading checked icon as well as text content slot.
  *
  * @param selected Whether the chip is currently checked.
  * @param onSelectedChange Called when the user clicks the chip and toggles checked.
@@ -26,7 +26,7 @@ import com.github.repos.core.designsystem.theme.NiaTheme
  * @param label The text label content.
  */
 @Composable
-fun NiaFilterChip(
+fun GithubFilterChip(
     selected: Boolean,
     onSelectedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
@@ -34,7 +34,7 @@ fun NiaFilterChip(
     leadingIcon: @Composable (() -> Unit)? = {
         if (selected) {
             Icon(
-                imageVector = NiaIcons.Check,
+                imageVector = GithubIcons.Check,
                 contentDescription = null,
             )
         } else {
@@ -61,28 +61,28 @@ fun NiaFilterChip(
             borderColor = MaterialTheme.colorScheme.onBackground,
             selectedBorderColor = MaterialTheme.colorScheme.onBackground,
             disabledBorderColor = MaterialTheme.colorScheme.onBackground.copy(
-                alpha = NiaChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
+                alpha = GithubChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
             ),
             disabledSelectedBorderColor = MaterialTheme.colorScheme.onBackground.copy(
-                alpha = NiaChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
+                alpha = GithubChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
             ),
-            selectedBorderWidth = NiaChipDefaults.ChipBorderWidth,
+            selectedBorderWidth = GithubChipDefaults.ChipBorderWidth,
         ),
         colors = FilterChipDefaults.filterChipColors(
             labelColor = MaterialTheme.colorScheme.onBackground,
             iconColor = MaterialTheme.colorScheme.onBackground,
             disabledContainerColor = if (selected) {
                 MaterialTheme.colorScheme.onBackground.copy(
-                    alpha = NiaChipDefaults.DISABLED_CHIP_CONTAINER_ALPHA,
+                    alpha = GithubChipDefaults.DISABLED_CHIP_CONTAINER_ALPHA,
                 )
             } else {
                 Color.Transparent
             },
             disabledLabelColor = MaterialTheme.colorScheme.onBackground.copy(
-                alpha = NiaChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
+                alpha = GithubChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
             ),
             disabledLeadingIconColor = MaterialTheme.colorScheme.onBackground.copy(
-                alpha = NiaChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
+                alpha = GithubChipDefaults.DISABLED_CHIP_CONTENT_ALPHA,
             ),
             selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
             selectedLabelColor = MaterialTheme.colorScheme.onBackground,
@@ -94,9 +94,9 @@ fun NiaFilterChip(
 @ThemePreviews
 @Composable
 fun ChipPreview() {
-    NiaTheme {
-        NiaBackground(modifier = Modifier.size(80.dp, 20.dp)) {
-            NiaFilterChip(selected = true, onSelectedChange = {}) {
+    GithubTheme {
+        GithubBackground(modifier = Modifier.size(80.dp, 20.dp)) {
+            GithubFilterChip(selected = true, onSelectedChange = {}) {
                 Text("Chip")
             }
         }
@@ -104,11 +104,9 @@ fun ChipPreview() {
 }
 
 /**
- * Now in Android chip default values.
+ * Github chip default values.
  */
-object NiaChipDefaults {
-    // TODO: File bug
-    // FilterChip default values aren't exposed via FilterChipDefaults
+object GithubChipDefaults {
     const val DISABLED_CHIP_CONTAINER_ALPHA = 0.12f
     const val DISABLED_CHIP_CONTENT_ALPHA = 0.38f
     val ChipBorderWidth = 1.dp

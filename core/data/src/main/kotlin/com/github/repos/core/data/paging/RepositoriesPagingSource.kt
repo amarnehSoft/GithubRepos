@@ -27,6 +27,7 @@ class RepositoriesPagingSource(
             )
 
             if (page == 1) {
+                // Reset the cache if it's the first page.
                 reposCache.clearRepositories()
             }
 
