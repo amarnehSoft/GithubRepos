@@ -30,7 +30,7 @@ internal object NetworkModule {
     fun okHttpCallFactory(
         tokenInterceptor: TokenInterceptor,
     ): Call.Factory = OkHttpClient.Builder()
-        .addInterceptor(tokenInterceptor)
+        // .addInterceptor(tokenInterceptor)
         .addInterceptor(
             HttpLoggingInterceptor()
                 .apply {

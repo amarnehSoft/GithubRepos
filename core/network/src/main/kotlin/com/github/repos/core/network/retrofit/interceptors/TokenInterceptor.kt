@@ -9,7 +9,7 @@ import javax.inject.Inject
 class TokenInterceptor @Inject constructor() : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest: Request = chain.request()
-        val token = "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"
+        val token = ""
 
         val modifiedRequest = originalRequest.newBuilder()
             .addHeader("Authorization", "Bearer $token")
