@@ -1,10 +1,14 @@
 GithubRepos App
 ==================
-This is a Kotlin-based Android application that fetches and displays trending GitHub repositories. Users can explore repositories based on different timeframes (last day, last week, last month), view repository details, and manage a favorite list of repositories. The app ensures an optimized and user-friendly experience.
+This is a Kotlin-based Android application that fetches and displays trending GitHub repositories.
+Users can explore repositories based on different timeframes (last day, last week, last month), view
+repository details, and manage a favorite list of repositories. The app ensures an optimized and
+user-friendly experience.
 
 # Features
 
 ### Core Features
+
 1. **Trending Repositories List:**
     - Displays repositories created in the last day, week, or month.
     - Sorted by the number of stars.
@@ -29,6 +33,7 @@ This is a Kotlin-based Android application that fetches and displays trending Gi
     - View favorites in a separate screen, even offline.
 
 ### Additional Features
+
 - **Infinite Scrolling:** Fetches more repositories when the user nears the end of the list.
 - **Image Caching:** Optimized avatar loading using Coil library.
 - **Offline Support:** Favorites are saved locally for offline access.
@@ -37,20 +42,34 @@ This is a Kotlin-based Android application that fetches and displays trending Gi
 - **No Internet Handling:** Provides a Snackbar when the device is offline.
 - **State Handling:** Loading, Error, and Empty states are handled gracefully.
 
-
 ## Screenshots
-![Screenshot](screenshots/1.png "Screenshot") ![Screenshot](screenshots/2.png "Screenshot")
-![Screenshot](screenshots/3.png "Screenshot") ![Screenshot](screenshots/4.png "Screenshot")
-![Screenshot](screenshots/5.png "Screenshot")
-![Screenshot](screenshots/6.png "Screenshot")
-![Screenshot](screenshots/7.png "Screenshot")
+
+<p align="center">
+  <img src="screenshots/1.png" alt="Screenshot 1" width="30%">
+  <img src="screenshots/2.png" alt="Screenshot 2" width="30%">
+  <img src="screenshots/3.png" alt="Screenshot 3" width="30%">
+</p>
+<p align="center">
+  <img src="screenshots/4.png" alt="Screenshot 4" width="30%">
+  <img src="screenshots/5.png" alt="Screenshot 5" width="30%">
+</p>
+<p align="center">
+  <img src="screenshots/6.png" alt="Screenshot 6" width="100%">
+</p>
+<p align="center">
+  <img src="screenshots/7.png" alt="Screenshot 7" width="100%">
+</p>
 
 ## Technical Details
 
 ### Tech Stack
+
 - **Language:** Kotlin
 - **Modularization:** Multi-module structure for scalability and maintainability.
-- **Architecture:** Follows the [official architecture guidance](https://developer.android.com/topic/architecture), and follows a reactive programming model with [unidirectional data flow](https://developer.android.com/topic/architecture/ui-layer#udf).
+- **Architecture:** Follows
+  the [official architecture guidance](https://developer.android.com/topic/architecture), and
+  follows a reactive programming model
+  with [unidirectional data flow](https://developer.android.com/topic/architecture/ui-layer#udf).
 - **Dependency Injection:** Hilt for DI management.
 - **Networking:** Retrofit with Kotlin Coroutines for API calls.
 - **Persistence:** Room for storing favorite repositories.
